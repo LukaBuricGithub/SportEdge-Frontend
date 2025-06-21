@@ -1,0 +1,162 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+
+$custom-primary-palette: (
+  50: #e0f0fa,
+  100: #b3dbf2,
+  200: #80c4e9,
+  300: #4daddf,
+  400: #269bd7,
+  500: #2080c3,
+  600: #1c73b1,
+  700: #18639a,
+  800: #145384,
+  900: #0d3960,
+  A100: #b3e0ff,
+  A200: #80ccff,
+  A400: #4db8ff,
+  A700: #26aaff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #000,
+  ),
+);
+
+$custom-orange-palette: (
+  50: #fff4e6,
+  100: #ffe1bf,
+  200: #ffcd99,
+  300: #ffb873,
+  400: #ffa752,
+  500: #ff9c30,
+  600: #e6892a,
+  700: #cc7724,
+  800: #b3651f,
+  900: #804816,
+  A100: #ffe1bf,
+  A200: #ffcd99,
+  A400: #ffa752,
+  A700: #cc7724,
+  contrast: (
+    500: #000,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #000,
+    A700: #fff,
+  )
+);
+
+
+/*
+$custom-primary-palette: (
+  50: #e9f0f1,
+  100: #c7d9dd,
+  200: #a2c0c6,
+  300: #7da7af,
+  400: #61949d,
+  500: #45818c,
+  600: #3e7984,
+  700: #366e79,
+  800: #2e646f,
+  900: #1f515c,
+  A100: #9cecff,
+  A200: #69e3ff,
+  A400: #36d9ff,
+  A700: #1dd4ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+*/
+
+
+$custom-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$custom-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$custom-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+
+$custom-theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $custom-primary,
+      accent: $custom-accent,
+      warn: $custom-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($custom-theme);
+
+:root {
+  @include mat.divider-overrides((
+    color: white,
+    width: 2px,
+  ));
+
+  @include mat.list-overrides((
+    //list-item-label-text-color:white,
+    //list-item-focus-label-text-color:white,
+    //list-item-hover-label-text-color:white,
+    list-item-label-text-weight:700,
+  ));
+}
+
+.mobile-footer 
+{
+    @include mat.expansion-overrides((
+    header-indicator-color:white,
+  ));
+}
+
+.sidenav 
+{
+   @include mat.list-overrides((
+    list-item-label-text-color:white,
+    list-item-focus-label-text-color:white,
+    list-item-hover-label-text-color:white,
+    list-item-label-text-weight:700,
+  ));
+}
+
+
+.orange-button {
+  --mdc-protected-button-container-color: #{mat.m2-get-color-from-palette($custom-orange-palette, 500)};
+  --mdc-protected-button-label-text-color: #{mat.m2-get-contrast-color-from-palette($custom-orange-palette, 500)};
+  --mdc-protected-button-hover-state-layer-color: #{mat.m2-get-color-from-palette($custom-orange-palette, 600)};
+
+  //background-color: mat.m2-get-color-from-palette($custom-orange-palette, 500);
+  //color: mat.m2-get-contrast-color-from-palette($custom-orange-palette, 500);
+  //&:hover {
+    //background-color: mat.m2-get-color-from-palette($custom-orange-palette, 600);
+  //}
+}

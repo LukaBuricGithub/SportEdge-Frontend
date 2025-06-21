@@ -1,0 +1,99 @@
+<main>
+    <h1>Customer Service</h1>
+    <h3>To contact us, please fill in the form below</h3>
+
+    <div class="contact-box">
+    
+        <form class="contact-form container" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            
+            <div class="row">
+                <mat-form-field appearance="outline" class="input-field col-md-12">
+                <mat-label>Subject</mat-label>
+                <mat-select formControlName="subject" required>
+                    <mat-option value="">-- Please choose an option --</mat-option>
+                    <mat-option value="returns">Returns</mat-option>
+                    <mat-option value="product">Product Enquiry</mat-option>
+                    <mat-option value="order">Order Issue</mat-option>
+                    <mat-option value="complaints and claims">Complaints and Claims</mat-option>
+                    <mat-option value="general">General Question</mat-option>
+                </mat-select>
+                 <mat-error *ngIf="contactForm.get('subject')?.hasError('required') && (contactForm.get('subject')?.touched || contactForm.get('subject')?.dirty)">
+                    Please select a subject.
+                </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field appearance="outline" class="input-field col-md-6">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" required />
+                    <mat-error *ngIf="contactForm.get('firstName')?.hasError('required')">
+                        First name is required.
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('firstName')?.hasError('minlength')">
+                        Must be at least 1 character.
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('firstName')?.hasError('maxlength')">
+                        Must be at most 100 characters.
+                    </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline" class="input-field col-md-6">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName" required />
+                        <mat-error *ngIf="contactForm.get('lastName')?.hasError('required')">
+                        Last name is required.
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('lastName')?.hasError('minlength')">
+                        Must be at least 1 character.
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('lastName')?.hasError('maxlength')">
+                        Must be at most 100 characters.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="row">
+                <mat-form-field appearance="outline" class="input-field col-md-12">
+                    <mat-label>E-mail address</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+                        Email is required.
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+                        Enter a valid email address.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+
+            <div class="row">
+                <mat-form-field appearance="outline" class="input-field col-md-12">
+                    <mat-label>Leave a comment</mat-label>
+                    <textarea matInput formControlName="content" placeholder="Comment..."></textarea>
+                    <mat-error *ngIf="contactForm.get('content')?.hasError('required')">
+                        Message is required.
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('content')?.hasError('minlength')">
+                        Message must be at least 1 character.
+                    </mat-error>
+                    <mat-error *ngIf="contactForm.get('content')?.hasError('maxlength')">
+                        Message must be at most 500 characters.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <button mat-raised-button color="primary" type="submit" class="btn-send-data">
+                Send Message
+            </button>
+
+        </form>
+
+    
+    </div>
+
+</main>

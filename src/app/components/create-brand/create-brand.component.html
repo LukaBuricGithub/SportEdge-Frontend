@@ -1,0 +1,29 @@
+<main>
+  <mat-card class="form-card">
+    <h1>Create new brand</h1>
+        <form class="container" [formGroup]="createBrandForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                    <mat-form-field appearance="outline" class="col-md-12 full-width">
+                    <mat-label>Brand name</mat-label>
+                    <input matInput formControlName="name">
+                         <mat-error *ngIf="createBrandForm.get('name')?.hasError('required')">
+                        Name is required.
+                        </mat-error>
+                        <mat-error *ngIf="createBrandForm.get('name')?.hasError('minlength')">
+                         Must be at least 2 character.
+                        </mat-error>
+                        <mat-error *ngIf="createBrandForm.get('name')?.hasError('maxlength')">
+                        Must be at most 100 characters.
+                        </mat-error>
+                    </mat-form-field>
+            </div>
+            <div class="button-container">
+
+                <button mat-button  type="button" (click)="onBack()">
+                <mat-icon>arrow_back</mat-icon>Back</button>
+
+                <button mat-raised-button color="primary" class="btn-send-data" type="submit">Create</button>
+            </div>
+        </form>
+    </mat-card>
+<main>

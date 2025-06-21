@@ -1,0 +1,196 @@
+main {
+  width: 85%;
+  margin: 0 auto;
+}
+
+
+.welcome-text
+{
+  text-align: center;
+}
+.welcome-text p 
+{
+  //font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.selected-categories-container
+{
+  margin-top: 75px;
+  margin-bottom: 50px;
+}
+
+.image-gallery-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.image-gallery
+{
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  object-position: top;
+}
+
+
+.image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+
+.button-group {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 10px; /* Space between buttons */
+  z-index: 2;
+  width: 100%;
+}
+
+.button-group button {
+  //padding: 10px 24px;
+  align-self: center;
+  width: 80%;
+  border-radius: 0.5px;
+
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.button-group button:hover {
+  background-color: black;
+  color: white;
+}
+
+.button-text 
+{
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.owl-carousel .owl-stage {
+  transition: transform 0.5s ease-in-out; 
+}
+
+
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.lightbox-image {
+  width: 100%;
+  max-width: 800px;
+  height: 500px; 
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.nav-button.left {
+  left: 10px;
+}
+
+.nav-button.right {
+  right: 10px;
+}
+
+
+
+
+/* Medium screens (e.g. tablets) */
+@media (max-width: 992px) {
+  .image-gallery {
+    height: 400px;
+  }
+}
+
+/* Small screens (e.g. phones) */
+@media (max-width: 576px) {
+  .image-gallery {
+    height: 300px;
+  }
+}
+
+@media (max-width: 307px) {
+ .button-text {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .button-text {
+    font-size: 14px;
+  }
+}
+
+

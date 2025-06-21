@@ -1,0 +1,92 @@
+<div class="footer-container">
+  <ng-container *ngIf="isMobile; else desktopFooter">
+    <mat-accordion class="mobile-footer">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Information</mat-panel-title>
+        </mat-expansion-panel-header>
+        <nav>
+          <a routerLink='/shop/about-us'>About us</a>
+          <a routerLink="/shop/information" fragment="cookies">Cookies usage</a>
+          <a routerLink="/shop/information" fragment="privacy">Privacy</a>
+        </nav>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Customer Service</mat-panel-title>
+        </mat-expansion-panel-header>
+        <nav>
+          <a href="/shop/contact">Customer service</a>
+          <a routerLink="/shop/information">FAQ</a>
+          <a routerLink="/shop/information" fragment="returns">Returns</a>
+        </nav>
+      </mat-expansion-panel>
+
+      <div class="social-media-mobile">
+        <h3>Follow us</h3>
+         <nav>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fa-brands fa-square-facebook"></i>            
+            </a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fa-brands fa-square-x-twitter"></i>            
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+               <i class="fa-brands fa-square-instagram"></i>
+            </a>
+        </div>
+        </nav>
+    </div>
+    </mat-accordion>
+  </ng-container>
+
+  <ng-template #desktopFooter>
+    <div class="container desktop-footer">
+     
+     <div class="row">
+        
+      <div class="col-md-4 footer-column">
+        <h3>Information</h3>
+        <mat-divider></mat-divider>
+        <nav>
+          <a routerLink='/shop/about-us'>About us</a>
+          <a routerLink="/shop/information" fragment="cookies">Cookies usage</a>
+          <a routerLink="/shop/information" fragment="privacy">Privacy</a>
+        </nav>
+      </div>
+
+      <div class="col-md-4 footer-column">
+        <h3>Customer Service</h3>
+        <mat-divider></mat-divider>
+        <nav>
+          <a href="/shop/contact">Customer service</a>
+          <a routerLink="/shop/information">FAQ</a>
+          <a routerLink="/shop/information" fragment="returns">Returns</a>
+        </nav>
+      </div>
+
+
+      <div class="col-md-4 footer-column">
+        <h3>Follow us on social</h3>
+        <mat-divider></mat-divider>
+        <nav>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fa-brands fa-square-facebook"></i>            
+            </a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fa-brands fa-square-x-twitter"></i>            
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+               <i class="fa-brands fa-square-instagram"></i>
+            </a>
+        </div>
+        </nav>
+      </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

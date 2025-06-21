@@ -1,0 +1,175 @@
+<main>
+  <h1>Sign up</h1>
+  <h3>Please fill out the form to register.</h3>
+  
+  <div class="sign-up-box">
+
+  <form class="sign-up-form container" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+
+      <mat-form-field appearance="outline" class="col-md-6 input-field">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName">
+        <mat-error *ngIf="signUpForm.get('firstName')?.hasError('required')">
+          First name is required.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('firstName')?.hasError('minlength')">
+          Must be at least 1 character.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('firstName')?.hasError('maxlength')">
+          Must be at most 100 characters.
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="outline" class="col-md-6 input-field">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName">
+        <mat-error *ngIf="signUpForm.get('lastName')?.hasError('required')">
+          Last name is required.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('lastName')?.hasError('minlength')">
+          Must be at least 1 character.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('lastName')?.hasError('maxlength')">
+          Must be at most 100 characters.
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+
+    <div class="row">
+
+      <mat-form-field appearance="outline" class="input-field col-md-6">
+        <mat-label>Country</mat-label>
+        <input matInput formControlName="country">
+        <mat-error *ngIf="signUpForm.get('country')?.hasError('required')">
+          Country is required.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('country')?.hasError('minlength')">
+          Must be at least 1 character.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('country')?.hasError('maxlength')">
+          Must be at most 100 characters.
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="input-field col-md-6">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city">
+        <mat-error *ngIf="signUpForm.get('city')?.hasError('required')">
+          City is required.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('city')?.hasError('minlength')">
+          Must be at least 1 character.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('city')?.hasError('maxlength')">
+          Must be at most 100 characters.
+        </mat-error>
+      </mat-form-field>
+
+
+    </div>
+
+
+    <div class="row">
+
+      <mat-form-field appearance="outline" class="input-field col-md-6">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address">
+        <mat-error *ngIf="signUpForm.get('address')?.hasError('required')">
+          Address is required.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('address')?.hasError('minlength')">
+          Must be at least 1 character.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('address')?.hasError('maxlength')">
+          Must be at most 100 characters.
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="outline" class="input-field col-md-6">
+        <mat-label>Date of birth</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="signUpForm.get('dateOfBirth')?.hasError('required')">
+          Date of birth is required.
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+
+    <div class="row">
+
+      <mat-form-field appearance="outline" class="input-field col-md-12">
+        <mat-label>E-mail address</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="signUpForm.get('email')?.hasError('required')">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('email')?.hasError('email')">
+          Enter a valid email address.
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+
+    <div class="row">
+
+      <mat-form-field appearance="outline" class="input-field col-md-6">
+        <mat-label>Password (at least 8 characters)</mat-label>
+        <input matInput type="password" formControlName="password1">
+        <mat-error *ngIf="signUpForm.get('password1')?.hasError('required')">
+          Password is required.
+        </mat-error>
+        <!-- <mat-error *ngIf="signUpForm.get('password1')?.hasError('minlength')">
+          At least 8 characters required.
+        </mat-error> -->
+        <mat-error *ngIf="signUpForm.get('password1')?.hasError('pattern')">
+          Must include uppercase, lowercase, and digit.
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="input-field col-md-6">
+        <mat-label>Repeat password</mat-label>
+        <input matInput type="password" formControlName="password2">
+        <mat-error *ngIf="signUpForm.get('password2')?.hasError('required')">
+          Please repeat your password.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-error *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('password2')?.touched">
+        Passwords do not match.
+      </mat-error>
+
+    </div>
+
+
+
+     <button mat-raised-button color="primary" type="submit" class="btn-send-data ">
+      Sign up
+    </button>
+
+  </form>
+
+  <hr>
+
+    <p>
+        <span class="dim-text">Already have an account? </span>
+        <a routerLink="/login" class="log-in-link">Log in</a>
+    </p>
+
+  </div>  
+
+</main>

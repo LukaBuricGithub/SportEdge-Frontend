@@ -1,0 +1,32 @@
+<main>
+  <mat-card class="form-card">
+    <h1>Brand Details</h1>
+
+    <div class="container">
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Brand Name</mat-label>
+          <input matInput [value]="brand?.name" readonly class="no-focus-input">
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-button type="button" (click)="onBack()">
+          <mat-icon>arrow_back</mat-icon>
+          Back
+        </button>
+
+        <button mat-stroked-button color="warn" type="button" (click)="onDelete(brand.id)">
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
+
+        <button mat-raised-button  class="orange-button" type="button" (click)="onUpdate(brand.id)">
+          <mat-icon>edit</mat-icon>
+          Update
+        </button>
+      </div>
+    </div>
+
+  </mat-card>
+</main>

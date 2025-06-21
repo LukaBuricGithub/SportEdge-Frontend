@@ -1,0 +1,42 @@
+<main>
+  <mat-card class="form-card">
+    <h1>Create new category</h1>
+    <form class="container" [formGroup]="createCategoryForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width">
+          <mat-label>Category name</mat-label>
+          <input matInput formControlName="name" />
+             <mat-error *ngIf="createCategoryForm.get('name')?.hasError('required')">
+            Name is required.
+            </mat-error>
+            <mat-error *ngIf="createCategoryForm.get('name')?.hasError('minlength')">
+            Must be at least 2 character.
+            </mat-error>
+            <mat-error *ngIf="createCategoryForm.get('name')?.hasError('maxlength')">
+            Must be at most 150 characters.
+            </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width">
+          <mat-label>Parent Category</mat-label>
+          <mat-select formControlName="parentCategoryId">
+            <mat-option [value]="null">None (root category)</mat-option>
+            <mat-option *ngFor="let category of hierarchicalCategories" [value]="category.id">
+              {{ category.displayName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-button type="button" (click)="onBack()">
+          <mat-icon>arrow_back</mat-icon>Back
+        </button>
+
+        <button mat-raised-button color="primary" type="submit">Create</button>
+      </div>
+    </form>
+  </mat-card>
+</main>

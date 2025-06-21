@@ -1,0 +1,62 @@
+<main>
+
+    <div class="welcome-text">
+    <h1>Welcome to Sportedge!</h1>
+    <p>Welcome to Sportedge, your new favourite sports shop! Whether you're a professional or a recreational athlete, we have everything you need to achieve top results.
+    </p>
+    </div>
+
+<!-- Owl carousel --> 
+<div class="image-gallery-container">
+<owl-carousel-o [options]="carouselOptions">
+  <ng-template carouselSlide *ngFor="let img of images; let i = index">
+    <img class="image-gallery" [src]="img" (click)="openLightbox(i)" />
+  </ng-template>
+</owl-carousel-o>
+</div>
+
+<!-- Lightbox overlay -->
+<div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="closeLightbox()">
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <span class="close-button" (click)="closeLightbox()">&times;</span>
+    <img [src]="images[currentIndex]" class="lightbox-image" />
+    <button class="nav-button left" (click)="prevImage($event)">&#10094;</button>
+    <button class="nav-button right" (click)="nextImage($event)">&#10095;</button>
+  </div>
+</div>
+
+
+<div class="container selected-categories-container">
+    <h1 style="text-align:center">Selected categories</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="image-container">
+            <img src="/images/index-page/selected-categories/Man.jpg" class="background-image">
+                <div class="button-group">
+                <button mat-raised-button class="button-text">Men's footwear</button>
+                <button mat-raised-button class="button-text">Men's clothing</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="image-container">
+            <img src="/images/index-page/selected-categories/Women.webp" class="background-image">
+                <div class="button-group">
+                <button mat-raised-button class="button-text">Women's footwear</button>
+                <button mat-raised-button class="button-text">Women's clothing</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="image-container">
+            <img src="/images/index-page/selected-categories/Equipment.jpg" class="background-image">
+                <div class="button-group">
+                <button mat-raised-button class="button-text">Sport equipment</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div> 
+</main>
+
+

@@ -1,1 +1,81 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import "bootstrap/scss/bootstrap-grid";
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+
+html, body { width: 100%; }
+body { margin: 0; font-family: Arial, "Helvetica Neue", sans-serif; }
+
+p { color: #434343; }
+
+h1,h2,h3,h4,h5 { color: #333;}
+
+
+.mat-mdc-form-field.ng-valid.ng-touched {
+  --mdc-outlined-text-field-outline-color: #4CAF50;
+  --mdc-outlined-text-field-hover-outline-color: #4CAF50;
+  --mdc-outlined-text-field-focus-outline-color: #4CAF50;
+}
+
+
+/*
+.mat-mdc-list-item__primary-text {
+  color: red;
+}*/
+
+
+.mat-drawer-inner-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow: hidden !important;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+//Snackbar styling
+.mat-mdc-snack-bar-container.error-snackbar {
+  --mdc-snackbar-container-color: #d32f2f;
+  --mdc-snackbar-supporting-text-color: white; 
+  --mdc-snackbar-container-shape: 8px;
+  font-weight: 600; 
+}
+
+.mat-mdc-snack-bar-container.error-snackbar
+  .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled).mat-unthemed {
+  color: white !important; 
+  font-weight: 600; 
+}
+
+.mat-mdc-snack-bar-container.error-snackbar
+  .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled).mat-unthemed:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+
+
+
+
+
+
+/*
+html {
+  color-scheme: light dark;
+  @include mat.theme((
+    color: mat.$violet-palette,
+    typography: Roboto,
+    density: 0
+  ));
+}
+
+body {
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
+*/

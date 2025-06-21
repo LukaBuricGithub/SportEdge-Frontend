@@ -1,0 +1,106 @@
+main 
+{
+    background-image: url('https://www.hervis.hr/store/_ui/desktop/common/images/background/bkg_cart_account_checkout.png');
+    //background-image: url('../../../../public/images/bkg_cart_account_checkout.png');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    //background-position: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+//background-image: url('https://www.hervis.hr/store/_ui/desktop/common/images/background/bkg_cart_account_checkout.png');
+//background-size: cover; 
+//background-repeat: no-repeat;
+//padding-top: 100px;
+//padding-bottom: 100px;
+
+
+.sign-up-box 
+{
+    width: 60%;
+    margin: 0 auto;
+    border: 0.25px solid;
+    border-radius: 3%;
+    margin-top: 60px;
+    background-color: white;
+    //margin-bottom: 45px;
+}
+
+hr 
+{
+    opacity: 0.5;
+}
+
+p
+{
+    text-align: center;
+    font-weight: normal;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+h1,h3
+{
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+
+
+.dim-text 
+{
+    opacity: 0.5;
+}
+
+.log-in-link
+{
+    display: inline;
+}
+
+.sign-up-form 
+{
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 35px;
+}
+
+
+.input-field
+{
+    margin-bottom: 20px;
+}
+
+
+.btn-send-data 
+{
+    width: 100%;
+    border-radius: 0.5px;
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+
+@media (max-width: 992px) {
+  .sign-up-box {
+    width: 85%;
+  }
+}
+
+/* Small screens (e.g. mobile) */
+@media (max-width: 576px) {
+  .sign-up-box {
+    width: 95%;
+  }
+}
+
+::ng-deep .error-snackbar {
+  background-color: #f44336;
+  color: white;
+}

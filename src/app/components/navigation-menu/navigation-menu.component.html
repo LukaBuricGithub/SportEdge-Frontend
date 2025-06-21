@@ -1,0 +1,100 @@
+<nav class="navbar navbar-expand-lg custom-navbar shadow-sm px-4 flex-column">
+
+
+  <!-- Combined Row: Logo + Search + Icons + Hamburger -->
+<div class="w-100 d-flex flex-wrap align-items-center justify-content-between py-2 gap-3">
+  
+  <!-- Logo + Search (left side) -->
+  <div class="d-flex align-items-center flex-grow-1 gap-3">
+    <a class="navbar-brand" routerLink="/">
+      <img src="/images/SportEdge-Logo.svg" height="40" />
+    </a>
+
+    <!-- Desktop search bar -->
+    <form class="d-none d-lg-flex w-25" role="search">
+      <div class="input-group w-100">
+        <input [(ngModel)]="searchTerm" name="desktopSearch" class="form-control search-bar" type="search" placeholder="Search products"
+          aria-label="Search" />
+        <button class="btn btn-outline-light" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Hamburger menu button -->
+  <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Icons -->
+  <ul class="navbar-nav d-flex flex-row gap-3">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/login">
+        <i class="bi bi-person"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/cart">
+        <i class="bi bi-cart"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+  <!-- Row 3: Navigation Links & Mobile Search -->
+  <div class="collapse navbar-collapse w-100" id="navbarNavDropdown">
+
+    <!-- Navigation Links -->
+    <ul class="navbar-nav ms-0">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownClothing" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Clothing
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownClothing">
+          <li><a class="dropdown-item" routerLink="/products/shoes">Men's clothing</a></li>
+          <li><a class="dropdown-item" routerLink="/products/clothes">Women's clothing</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownFootwear" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Footwear
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownFootwear">
+          <li><a class="dropdown-item" routerLink="/products/shoes">Men's footwear</a></li>
+          <li><a class="dropdown-item" routerLink="/products/clothes">Women's footwear</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdownSports" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          Sports
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownSports">
+          <li><a class="dropdown-item" routerLink="/products/shoes">Sport 1</a></li>
+          <li><a class="dropdown-item" routerLink="/products/clothes">Sport 2</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contact">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Search bar for mobile -->
+    <form class="d-lg-none px-3 mt-3 mb-2" role="search">
+      <div class="input-group">
+        <input [(ngModel)]="searchTerm" name="mobileSearch" class="form-control search-bar" type="search" placeholder="Search products"
+          aria-label="Search" />
+        <button class="btn btn-outline-light" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+</nav>

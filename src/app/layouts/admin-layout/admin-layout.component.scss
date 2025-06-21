@@ -1,0 +1,92 @@
+.sidenav-container {
+  height: 100%;
+  background-color: white;
+}
+
+.admin-content 
+{
+    display: flex;
+    justify-content: flex-start;
+    padding: 32px 16px 16px 16px;
+    width: 100%;
+    margin-top: 45px;
+}
+
+.admin-content-item
+{
+  width: 70%;
+}
+
+.sidenav {
+  width: 200px;
+  background-color: #222222;
+  overflow: hidden;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+  color: white;
+  font-weight: 700;
+}
+
+.mat-toolbar 
+{
+  background-color: #222222;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.logo {
+  height: 24px;
+  width: auto;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+
+
+.admin-board-title
+{
+  color: white;
+  font-weight: 700;
+  font-size: 24px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-icon 
+{
+  color: white;
+}
+
+
+::ng-deep .mdc-list-item__content {
+  border-bottom: 1px solid white;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .admin-board-title {
+    font-size: 18px;
+  }
+  .admin-content-item {
+    width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-board-title {
+    font-size: 16px;
+  }
+  .admin-content-item {
+    width: 95%;
+  }
+}
