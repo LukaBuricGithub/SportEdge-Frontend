@@ -1,0 +1,118 @@
+<main *ngIf="product">
+  <mat-card class="form-card">
+    <h1>Product details</h1>
+
+    <div class="container">
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Product name</mat-label>
+          <input matInput [value]="product.name" readonly class="no-focus-input" />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Short description</mat-label>
+          <textarea matInput [value]="product.shortDescription" readonly class="no-focus-input"></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Price</mat-label>
+          <input matInput [value]="product.price" readonly class="no-focus-input" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Discounted price</mat-label>
+          <input matInput [value]="product.discountedPrice" readonly class="no-focus-input" />
+        </mat-form-field>
+      </div> -->
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Price</mat-label>
+          <input matInput [value]="product.price" readonly class="no-focus-input" />
+          <mat-icon matSuffix class="euro-icon">euro_symbol</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Discounted price</mat-label>
+          <input matInput [value]="product.discountedPrice ? product.discountedPrice  : ''" readonly class="no-focus-input" />
+          <mat-icon matSuffix class="euro-icon">euro_symbol</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Brand</mat-label>
+          <input matInput [value]="product.brandName" readonly class="no-focus-input" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Gender</mat-label>
+          <input matInput [value]="product.genderName" readonly class="no-focus-input" />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Categories</mat-label>
+          <input matInput [value]="product.categoryNames.join(', ')" readonly class="no-focus-input" />
+        </mat-form-field>
+      </div>
+
+
+      <div class="button-container">
+        <button mat-button type="button" (click)="onBack()">
+          <mat-icon>arrow_back</mat-icon> Back
+        </button>
+
+        <button mat-stroked-button color="warn" type="button" (click)="onDelete(product.id)">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+
+        <button mat-raised-button class="orange-button" type="button" (click)="onUpdate(product.id)">
+          <mat-icon>edit</mat-icon> Update
+        </button>
+      </div>
+
+    </div>
+  </mat-card>
+
+  <mat-accordion>
+
+    <mat-expansion-panel class="expansion-spacing">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">Product image related actions</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="uploadImages(productId)">
+          Upload images
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteImages(productId)">
+          Delete images
+        </button>
+      </div>
+    </mat-expansion-panel>
+
+
+        <mat-expansion-panel class="expansion-spacing">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">Update stock quantity</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="updateProductVariationQuantity(productId)">
+          Update quantity
+        </button>
+      </div>
+    </mat-expansion-panel>
+
+
+
+
+  </mat-accordion>
+
+
+</main>

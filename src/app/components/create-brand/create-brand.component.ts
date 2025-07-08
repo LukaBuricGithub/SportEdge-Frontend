@@ -44,7 +44,7 @@ export class CreateBrandComponent implements OnInit {
     const formValue = this.createBrandForm.value;
 
     const payload: CreateBrandRequestDTO = {
-      Name:formValue.name
+      name:formValue.name
     };
 
 

@@ -10,6 +10,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/AuthenticationServices/auth.interceptor';
 
 
+
+
 const scrollConfig: InMemoryScrollingOptions = 
 {
   //scrollPositionRestoration:'top',

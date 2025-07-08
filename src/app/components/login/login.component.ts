@@ -4,6 +4,7 @@ import {FormControl, FormsModule, ReactiveFormsModule, Validators, FormBuilder, 
 import { AuthService } from '../../services/AuthenticationServices/auth.service';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -13,7 +14,6 @@ import { CommonModule } from '@angular/common';
   imports: [...MaterialModules,FormsModule, ReactiveFormsModule,CommonModule,RouterModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  //Novo dodano
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -28,9 +28,11 @@ export class LoginComponent implements OnInit {
   }
 
   loginForm!:FormGroup;
-  errorMessage: string |null = null;
+  //errorMessage: string |null = null;
   
-  constructor(private fb:FormBuilder, private authService:AuthService, private router:Router ){ }
+  constructor(private fb:FormBuilder, private authService:AuthService, private router:Router,
+    private snackBar:MatSnackBar
+   ){ }
 
   ngOnInit(): void 
   {
@@ -48,19 +50,42 @@ export class LoginComponent implements OnInit {
   
   onSubmit(): void 
   {
-    if (this.loginForm.invalid) return;
+
+     if(this.loginForm.invalid)
+    {
+      this.snackBar.open('Please fix the errors in the form.', 'Close', {
+        duration: 4000,
+        panelClass: ['error-snackbar']
+      });
+      return; 
+    }
 
     const credentials = this.loginForm.value;
+
+
     this.authService.login(credentials).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
         const userData = this.authService.decodeToken();
         console.log('Login successful:', userData);
-        //this.router.navigate(['/dashboard']); // Adjust the route
+        this.router.navigate(['/shop/index']);
       },
       error: (err) => {
-        this.errorMessage = 'Invalid email or password';
+        let errorMessage = 'An unknown error occurred.';
+          switch (err.status) {
+            case 400:
+              errorMessage = err?.error?.message || 'Invalid email or password.';
+              break;
+            default:
+              errorMessage = err?.error?.message || 'Invalid email or password.';
+              break;
+        }
+
         console.error('Login failed', err);
+           this.snackBar.open(errorMessage, 'Close', {
+          duration: 4000,
+          panelClass: ['error-snackbar']
+        });
       }
     });
   }

@@ -33,8 +33,8 @@
             <div class="image-container">
             <img src="/images/index-page/selected-categories/Man.jpg" class="background-image">
                 <div class="button-group">
-                <button mat-raised-button class="button-text">Men's footwear</button>
-                <button mat-raised-button class="button-text">Men's clothing</button>
+                <button mat-raised-button class="button-text" (click)="onGenderTypeClick('Men\'s (footwear)')">Men's footwear</button>
+                <button mat-raised-button class="button-text" (click)="onGenderTypeClick('Men\'s (clothing)')">Men's clothing</button>
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
             <div class="image-container">
             <img src="/images/index-page/selected-categories/Women.webp" class="background-image">
                 <div class="button-group">
-                <button mat-raised-button class="button-text">Women's footwear</button>
-                <button mat-raised-button class="button-text">Women's clothing</button>
+                <button mat-raised-button class="button-text" (click)="onGenderTypeClick('Women\'s (footwear)')">Women's footwear</button>
+                <button mat-raised-button class="button-text" (click)="onGenderTypeClick('Women\'s (clothing)')">Women's clothing</button>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="image-container">
             <img src="/images/index-page/selected-categories/Equipment.jpg" class="background-image">
                 <div class="button-group">
-                <button mat-raised-button class="button-text">Sport equipment</button>
+                <button mat-raised-button class="button-text" (click)="onGenderTypeClick('Equipment')">Sport equipment</button>
                 </div>
             </div>
         </div>

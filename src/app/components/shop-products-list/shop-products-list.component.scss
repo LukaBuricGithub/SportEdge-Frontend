@@ -1,0 +1,132 @@
+main 
+{
+    min-height: 80vh;
+    //margin-top: 60px;
+    margin-bottom: 75px;
+}
+
+.product-card {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    // height: 300px; 
+    // object-fit: cover;
+      width: 100%;
+  height: auto;
+  object-fit: contain;
+  }
+
+  // .no-image-placeholder {
+  //   height: 300px; 
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   background-color: #ffffff;
+  //   color: #888;
+  //   font-size: 0.95rem;
+  //   font-style: italic;
+  // }
+
+  .no-image-placeholder 
+  { 
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #888;
+    font-size: 0.95rem;
+    font-style: italic;
+  }
+
+  .product-name {
+    font-size: 1rem; 
+    margin-top: 0.5rem;
+    font-weight: 700;
+    text-align: center; 
+  }
+
+  .price {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 1.3rem; 
+
+    .original-price {
+      text-decoration: line-through;
+      color: gray;
+      margin-right: 5px;
+    }
+
+    .discount-price {
+      color: #d32f2f;
+      font-weight: bold;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+.drawer-content {
+  padding: 16px;
+}
+
+.drawer-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+
+.no-products-message {
+  margin-top: 50px;
+  color: #555;
+}
+
+
+.product-card.disabled-card {
+  position: relative;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.out-of-stock-text {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-align: center;
+  display: block;
+  //display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+
+
+.discount-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #d32f2f;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  z-index: 2;
+}

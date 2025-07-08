@@ -56,8 +56,8 @@
           Clothing
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownClothing">
-          <li><a class="dropdown-item" routerLink="/products/shoes">Men's clothing</a></li>
-          <li><a class="dropdown-item" routerLink="/products/clothes">Women's clothing</a></li>
+          <li><a class="dropdown-item" href="#" (click)="onGenderTypeClick('Men\'s (clothing)'); $event.preventDefault()">Men's clothing</a></li>
+          <li><a class="dropdown-item" href="#" (click)="onGenderTypeClick('Women\'s (clothing)'); $event.preventDefault()">Women's clothing</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
@@ -66,8 +66,8 @@
           Footwear
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownFootwear">
-          <li><a class="dropdown-item" routerLink="/products/shoes">Men's footwear</a></li>
-          <li><a class="dropdown-item" routerLink="/products/clothes">Women's footwear</a></li>
+          <li><a class="dropdown-item" href="#" (click)="onGenderTypeClick('Men\'s (footwear)'); $event.preventDefault()">Men's footwear</a></li>
+          <li><a class="dropdown-item" href="#" (click)="onGenderTypeClick('Women\'s (footwear)'); $event.preventDefault()">Women's footwear</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
@@ -76,12 +76,13 @@
           Sports
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownSports">
-          <li><a class="dropdown-item" routerLink="/products/shoes">Sport 1</a></li>
-          <li><a class="dropdown-item" routerLink="/products/clothes">Sport 2</a></li>
+          <li *ngFor="let category of sportsCategories">
+          <a class="dropdown-item" (click)="onCategoryClick(category.id)">{{ category.name }}</a>
+          </li>
         </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/contact">Contact</a>
+        <a class="nav-link" routerLink="/shop/contact">Customer service</a>
       </li>
     </ul>
 

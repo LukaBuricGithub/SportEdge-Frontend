@@ -80,8 +80,21 @@ export class UpdateBrandComponent implements OnInit {
         });
       },
         error:(error) => {
+
+            let errorMessage = 'An unknown error occurred.';
+
+            switch(error.status) 
+            {
+              case 400:
+                errorMessage = error?.error?.message || 'Cannot update brand because it has related objects.';
+                break;
+              default:
+                errorMessage = error?.error?.message || 'Unexpected error occurred.';
+                break;
+            }
+
             console.error('Update of brand failed:', error);
-            this.snackBar.open('Update of brand failed. Check if you are allowed to update brand.', 'Close', {
+            this.snackBar.open(errorMessage, 'Close', {
             duration: 4000,
             panelClass: ['error-snackbar']
           });

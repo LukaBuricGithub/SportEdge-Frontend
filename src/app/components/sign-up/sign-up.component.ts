@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FormControl, FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { SignUpRequestDTO } from '../../models/SignUpRequestDTO';
 import { UserService } from '../../services/user.service';
 
@@ -79,7 +79,8 @@ export class SignUpComponent implements OnInit {
       LastName: formValue.lastName,
       Email: formValue.email,
       Password: formValue.password1,
-      DateOfBirth: new Date(formValue.dateOfBirth).toISOString().split('T')[0], // e.g. "1990-01-01"
+      DateOfBirth: formatDate(formValue.dateOfBirth ,"yyyy-MM-dd", "en-US", ""),
+      //new Date(formValue.dateOfBirth).toISOString().split('T')[0], // e.g. "1990-01-01"
       Country: formValue.country,
       City: formValue.city,
       Address: formValue.address,
@@ -88,7 +89,7 @@ export class SignUpComponent implements OnInit {
     this.userService.userSignUp(payload).subscribe({
       next: (response) => {
       console.log('Registration successful:', response);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/shop/login']);
       },
       error: (error) => {
         console.error('Registration failed:', error);

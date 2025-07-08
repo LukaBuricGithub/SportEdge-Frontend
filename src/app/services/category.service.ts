@@ -44,5 +44,10 @@ export class CategoryService {
     return this.http.delete<void>(url);
   }
 
+  getRootCategories() : Observable<CategoryDTO[]>
+  {
+    const url = `${this.baseUrl}/root-categories`
+    return this.http.get<CategoryDTO[]>(url);
+  }
 
 }

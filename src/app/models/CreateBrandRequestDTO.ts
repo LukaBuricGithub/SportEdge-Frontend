@@ -1,4 +1,4 @@
 export interface CreateBrandRequestDTO 
 {
-        Name:string;
+        name:string;
 }       

@@ -1,1 +1,47 @@
-<p>details-category works!</p>
+<main>
+  <mat-card class="form-card">
+    <h1>Category details</h1>
+
+    <div class="container">
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Category Name</mat-label>
+          <input matInput [value]="category?.name" readonly class="no-focus-input">
+        </mat-form-field>
+      </div>
+
+      <div class="row" *ngIf="category?.parentCategories?.length">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Parent Category</mat-label>
+          <input matInput [value]="category.parentCategories.join(' → ')" readonly class="no-focus-input">
+        </mat-form-field>
+      </div>
+
+      <div class="row" *ngIf="category?.childCategories?.length">
+        <mat-form-field appearance="outline" class="col-md-12 full-width" disabled>
+          <mat-label>Child Categories</mat-label>
+          <input matInput [value]="category.childCategories.join(', ')" readonly class="no-focus-input">
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-button type="button" (click)="onBack()">
+          <mat-icon>arrow_back</mat-icon>
+          Back
+        </button>
+
+        <button mat-stroked-button color="warn" type="button" (click)="onDelete(category.id)">
+          <mat-icon>delete</mat-icon>
+          Delete
+        </button>
+
+        <button mat-raised-button class="orange-button" type="button" (click)="onUpdate(category.id)">
+          <mat-icon>edit</mat-icon>
+          Update
+        </button>
+      </div>
+    </div>
+
+  </mat-card>
+</main>
+

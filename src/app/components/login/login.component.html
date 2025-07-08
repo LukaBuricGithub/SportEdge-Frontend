@@ -39,7 +39,7 @@
     </div>
 
 
-    <a routerLink="/forgot-password">Forgot password?</a>
+    <a routerLink="/shop/forgot-password">Forgot password?</a>
 
     <button mat-raised-button color="primary"
             class="btn-send-data "
@@ -53,11 +53,8 @@
 
     <p>
         <span class="dim-text">Don't have an account? </span>
-        <a routerLink="/sign-up" class="sign-up-link">Sign up</a>
+        <a routerLink="/shop/sign-up" class="sign-up-link">Sign up</a>
     </p>
 
     </div>
-
-    <!-- Show login error if exists -->
-    <div *ngIf="errorMessage" style="color: red">{{ errorMessage }}</div>
 </main>

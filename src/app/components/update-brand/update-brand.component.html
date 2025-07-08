@@ -3,7 +3,7 @@
     <h1>Update brand</h1>
         <form class="container" [formGroup]="updateBrandForm" (ngSubmit)="onSubmit()">
             <div class="row">
-                    <mat-form-field appearance="outline" class="col-md-12 full-width">
+                    <mat-form-field appearance="outline" class="col-md-12 full-width input-field">
                     <mat-label>Brand name</mat-label>
                     <input matInput formControlName="name">
                          <mat-error *ngIf="updateBrandForm.get('name')?.hasError('required')">

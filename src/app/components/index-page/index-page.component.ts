@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { MaterialModules } from '../../shared-files/material.imports';
 import { CommonModule } from '@angular/common';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-
-
+import { CategoryService } from '../../services/category.service';
+import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 
 
 
@@ -15,8 +16,11 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
   styleUrl: './index-page.component.scss'
 })
 
-export class IndexPageComponent {
+export class IndexPageComponent  {
     
+  constructor(private categoryService:CategoryService,private productService:ProductService,private router:Router) {}
+
+
   carouselOptions: OwlOptions = {
     loop: true,
     margin: 10,
@@ -71,6 +75,11 @@ nextImage(event: Event) {
   event.stopPropagation();
   this.currentIndex = (this.currentIndex + 1) % this.images.length;
 }
+
+  onGenderTypeClick(genderType:string)
+  {
+    this.router.navigate(['/shop/search'], { queryParams: { genderType:genderType } });
+  }
 
 
 }

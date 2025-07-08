@@ -1,0 +1,28 @@
+<main>
+  <mat-card class="form-card">
+    <h1>Update product quantities</h1>
+    <form [formGroup]="updateProductVariationsForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="variations">
+        <div *ngFor="let variationGroup of variationsFormArray.controls; let i = index" [formGroupName]="i" class="row">
+          <mat-form-field appearance="outline" class="col-md-12 full-width input-field">
+            <mat-label>{{ variationGroup.get('sizeOptionName')?.value }} - quantity</mat-label>
+            <input matInput type="number" formControlName="quantityInStock" min="0">
+            <mat-error *ngIf="variationGroup.get('quantityInStock')?.hasError('required')">
+              Quantity is required.
+            </mat-error>
+            <mat-error *ngIf="variationGroup.get('quantityInStock')?.hasError('min')">
+              Cannot be negative.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="button-container">
+       <button mat-button type="button" (click)="onBack(productId)">
+          <mat-icon>arrow_back</mat-icon>Back
+        </button>
+        <button mat-raised-button color="primary" class="btn-send-data" type="submit">Update Quantities</button>
+      </div>
+    </form>
+  </mat-card>
+</main>

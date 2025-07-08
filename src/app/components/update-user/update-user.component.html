@@ -1,0 +1,96 @@
+<main>
+  <mat-card class="form-card">
+    <h1>Update user</h1>
+
+    <form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()" class="container">
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width input-field">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-error *ngIf="updateUserForm.get('firstName')?.hasError('required')">
+            First name is required.
+          </mat-error>
+          <mat-error *ngIf="updateUserForm.get('firstName')?.hasError('minlength')">
+            Must be at least 1 character.
+          </mat-error>
+          <mat-error *ngIf="updateUserForm.get('firstName')?.hasError('maxlength')">
+            Must be at most 100 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-md-12 full-width input-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error *ngIf="updateUserForm.get('lastName')?.hasError('required')">
+            Last name is required.
+          </mat-error>
+          <mat-error *ngIf="updateUserForm.get('lastName')?.hasError('minlength')">
+            Must be at least 1 character.
+          </mat-error>
+          <mat-error *ngIf="updateUserForm.get('lastName')?.hasError('maxlength')">
+            Must be at most 100 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width input-field">
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country" />
+          <mat-error *ngIf="updateUserForm.get('country')?.hasError('required')">
+            Country is required.
+          </mat-error>
+          <mat-error *ngIf="updateUserForm.get('country')?.hasError('maxlength')">
+            Must be at most 100 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-md-12 full-width input-field">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" />
+          <mat-error *ngIf="updateUserForm.get('city')?.hasError('required')">
+            City is required.
+          </mat-error>
+          <mat-error *ngIf="updateUserForm.get('city')?.hasError('maxlength')">
+            Must be at most 100 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width input-field">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" />
+          <mat-error *ngIf="updateUserForm.get('address')?.hasError('required')">
+            Address is required.
+          </mat-error>
+          <mat-error *ngIf="updateUserForm.get('address')?.hasError('maxlength')">
+            Must be at most 100 characters.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-12 full-width input-field">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="updateUserForm.get('dateOfBirth')?.hasError('required')">
+            Date of birth is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-button type="button" (click)="onBack(userId)">
+          <mat-icon>arrow_back</mat-icon>
+          Back
+        </button>
+
+        <button mat-raised-button class="orange-button" type="submit">Update</button>
+      </div>
+    </form>
+  </mat-card>
+</main>

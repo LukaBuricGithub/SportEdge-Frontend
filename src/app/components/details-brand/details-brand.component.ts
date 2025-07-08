@@ -68,15 +68,31 @@ export class DetailsBrandComponent implements OnInit{
           this.router.navigate(['/admin/brands']);
         },
         error: (error) => {
+
+          let errorMessage = 'An unknown error occurred.';
+
+          switch(error.status) 
+          {
+            case 400:
+              errorMessage = error?.error?.message || 'Cannot delete brand because it has related objects.';
+              break;
+            default:
+               errorMessage = error?.error?.message || 'Unexpected error occurred.';
+              break;
+          }
+
+
           console.error('Failed to delete brand:', error);
-          this.snackBar.open('Failed to delete brand. Check if you are allowed to delete brand.', 'Close', {
+          this.snackBar.open(errorMessage, 'Close', {
           duration: 4000,
           panelClass: ['error-snackbar']
-        });
+          });
         }
+
       });
     }
   });
+  
 }
 
   onUpdate(brandId:number)

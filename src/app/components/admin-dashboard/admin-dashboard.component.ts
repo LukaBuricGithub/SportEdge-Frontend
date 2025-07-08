@@ -51,7 +51,6 @@ import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-admin-dashboard',
-  //AI hoce ovo
   standalone: true,
   imports: [...MaterialModules],
   templateUrl: './admin-dashboard.component.html',

@@ -34,6 +34,8 @@ export class AdministratorCategoryContentComponent implements OnInit {
     categories: CategoryDTO[] = [];
   
     constructor(private router:Router,private categoryService:CategoryService) {}
+
+
   
     ngOnInit(): void {
 
@@ -54,7 +56,7 @@ export class AdministratorCategoryContentComponent implements OnInit {
       
     }
   
-     applyFilter(event: Event) {
+    applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
   
@@ -70,7 +72,7 @@ export class AdministratorCategoryContentComponent implements OnInit {
       });
     }
 
-
+  
     onCreateCategory(): void 
     {
        this.router.navigate(['/admin/create-category']);

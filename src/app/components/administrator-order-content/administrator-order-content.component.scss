@@ -1,0 +1,49 @@
+.responsive-table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.full-width-table {
+  min-width: 600px; 
+  width: 100%;
+}
+
+
+.icon-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+
+.expansion-spacing 
+{
+  margin-bottom: 16px;
+}
+
+.title {
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 0.9rem;
+  }
+}
+
+.icon-right mat-icon {
+  font-size: 24px;
+  color:#222;;
+}

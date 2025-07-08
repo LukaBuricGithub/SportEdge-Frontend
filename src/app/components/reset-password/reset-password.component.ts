@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { ResetPasswordRequestDTO } from '../../models/ResetPasswordRequestDTO';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class ResetPasswordComponent implements OnInit {
   resetPasswordForm!:FormGroup
 
 
-  constructor(private fb:FormBuilder, private userService:UserService, private router:Router){ }
+  constructor(private fb:FormBuilder, private userService:UserService, private router:Router,private snackBar:MatSnackBar){ }
   
   ngOnInit(): void 
   {
@@ -47,7 +48,16 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit(): void  
   { 
-    if(this.resetPasswordForm.invalid) return
+
+    if(this.resetPasswordForm.invalid)
+    {
+      this.snackBar.open('Please fix the errors in the form.', 'Close', {
+        duration: 4000,
+        panelClass: ['error-snackbar']
+      });
+      return; 
+    }
+
     
     const formValue = this.resetPasswordForm.value;
 
@@ -59,11 +69,14 @@ export class ResetPasswordComponent implements OnInit {
     this.userService.userResetPassword(payload).subscribe({
        next: (response) => {
       console.log('Password reset successful:', response);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/shop/login']);
       },
       error: (error) => {
         console.error('Password reset failed:', error);
-        // Optionally: Show error message to the user
+        this.snackBar.open('Password reset request failed. Please try again.', 'Close', {
+        duration: 4000,
+        panelClass: ['error-snackbar']
+        });
       }
     });
   }

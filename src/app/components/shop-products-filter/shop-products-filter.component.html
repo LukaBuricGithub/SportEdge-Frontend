@@ -1,0 +1,55 @@
+<h3 *ngIf="showTitle">Filter</h3>
+
+<mat-accordion multi>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Gender / Type</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <!-- <mat-label>Gender / Type</mat-label> -->
+      <mat-select [(value)]="selectedGender" placeholder="Any">
+        <mat-option [value]="null">Any</mat-option>
+        <mat-option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Categories</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-select [(value)]="selectedCategories" multiple placeholder="Non specific">
+        <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Brand</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-select [(value)]="selectedBrand" placeholder="Any">
+        <mat-option [value]="null">Any</mat-option>
+        <mat-option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Price range</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-slider class="price-slider" min="1" max="500" step="1">
+      <input matSliderStartThumb [(ngModel)]="priceRange[0]" />
+      <input matSliderEndThumb [(ngModel)]="priceRange[1]" />
+    </mat-slider>
+    <label class="price-label">€{{ priceRange[0] }} - €{{ priceRange[1] }}</label>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="filter-actions">
+  <button mat-raised-button color="primary" class="action-button" (click)="apply()">Apply</button>
+  <button mat-stroked-button class="action-button" (click)="clear()">Clear</button>
+</div>
