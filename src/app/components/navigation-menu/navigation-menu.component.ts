@@ -50,11 +50,19 @@ export class NavigationMenuComponent implements OnInit {
 
   onSearch() 
   {
-    if (this.searchTerm.trim()) {
-    // Navigate or filter your products, e.g.:
-    console.log('Searching for:', this.searchTerm);
-    // this.router.navigate(['/products'], { queryParams: { q: this.searchTerm } });
+    const trimmed = this.searchTerm.trim();
+    if (!trimmed) 
+    {
+      console.log('Empty search term, no request sent');
+      return;
     }
+    this.router.navigate(['/shop/search'], { queryParams: { searchText:trimmed } });
+
+    //if (this.searchTerm.trim()) {
+    // Navigate or filter your products, e.g.:
+    //console.log('Searching for:', this.searchTerm);
+    // this.router.navigate(['/products'], { queryParams: { q: this.searchTerm } });
+    //}
   }
 
 

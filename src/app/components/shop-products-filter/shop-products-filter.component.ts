@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MaterialModules } from '../../shared-files/material.imports';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet, RouterModule, Router, ActivatedRoute } from '@angular/router';
@@ -21,6 +21,7 @@ import { CategoryService } from '../../services/category.service';
 import { BrandDTO } from '../../models/BrandDTO';
 import { GenderDTO } from '../../models/GenderDTO';
 import { CategoryDTO } from '../../models/CategoryDTO';
+import { ProductFilterDto } from '../../models/ProductFilterDto';
 
 @Component({
   selector: 'app-shop-products-filter',
@@ -28,10 +29,19 @@ import { CategoryDTO } from '../../models/CategoryDTO';
   templateUrl: './shop-products-filter.component.html',
   styleUrl: './shop-products-filter.component.scss'
 })
-export class ShopProductsFilterComponent implements OnInit 
+export class ShopProductsFilterComponent implements OnInit ,OnChanges  
 {
 
   @Input() showTitle: boolean = false;
+
+  @Input() selectedCategoryId: number | null = null;
+
+  @Input() selectedGenderTypeId: number | null = null;
+
+  @Input() filters!: ProductFilterDto;
+
+  
+
 
   //@Input() categories: string[] = [];
   //@Input() brands: string[] = [];
@@ -62,12 +72,44 @@ export class ShopProductsFilterComponent implements OnInit
 
     this.categoryService.getAllCategories().subscribe((y:CategoryDTO[]) => {
       this.categories = y;
+
+        if (this.selectedCategoryId && !this.selectedCategories.includes(this.selectedCategoryId)) {
+      this.selectedCategories.push(this.selectedCategoryId);
+    }
     });
     
     this.productService.getAllGendersCategory().subscribe((z:GenderDTO[]) => {
       this.genders = z;
+
+      if (this.selectedGenderTypeId) 
+      {
+        this.selectedGender = this.selectedGenderTypeId;
+      }
     });
   }
+
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes['selectedGenderTypeId'] && this.selectedGenderTypeId) {
+  //     this.selectedGender = this.selectedGenderTypeId;
+  //   }
+
+  //   if (changes['selectedCategoryId'] && this.selectedCategoryId && !this.selectedCategories.includes(this.selectedCategoryId)) {
+  //     this.selectedCategories.push(this.selectedCategoryId);
+  //   }
+  // }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+  if (changes['filters'] && this.filters) {
+    this.selectedCategories = this.filters.categoryIds ? [...this.filters.categoryIds] : [];
+    this.selectedGender = this.filters.genderId ?? null;
+    this.selectedBrand = this.filters.brandId ?? null;
+    this.priceRange = [
+      this.filters.minPrice ?? 1,
+      this.filters.maxPrice ?? 500
+    ];
+  }
+}
+
 
   apply(closeDrawer: boolean = true): void {
     this.applyFilters.emit({
@@ -86,6 +128,4 @@ export class ShopProductsFilterComponent implements OnInit
     this.priceRange = [1, 500];
     this.apply(false);
   }
-
-
 }

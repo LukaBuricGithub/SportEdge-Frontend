@@ -1,8 +1,15 @@
 main 
 {
     min-height: 80vh;
-    //margin-top: 60px;
-    margin-bottom: 75px;
+    //padding-top: 60px;
+    //margin-bottom: 75px;
+}
+
+
+.desktop-layout 
+{
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .product-card {
@@ -114,10 +121,6 @@ main
 }
 
 
-
-
-
-
 .discount-badge {
   position: absolute;
   top: 8px;
@@ -129,4 +132,26 @@ main
   font-weight: bold;
   font-size: 0.9rem;
   z-index: 2;
+}
+
+.mobile-filter-sort-container {
+  gap: 8px; 
+}
+
+.desktop-layout .row {
+  display: flex;
+}
+
+.desktop-layout .col-lg-3,
+.desktop-layout .col-lg-9 {
+  display: flex;
+  flex-direction: column;
+}
+
+.desktop-layout .col-lg-9 {
+  flex: 1;
+}
+
+.paginator-spacer {
+  min-height: 200px;
 }

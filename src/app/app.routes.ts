@@ -39,6 +39,7 @@ import { ContactPageComponent } from './components/contact-page/contact-page.com
 import { ThankYouMessageCustomerServiceComponent } from './components/thank-you-message-customer-service/thank-you-message-customer-service.component';
 
 import { ShopProductsListComponent } from './components/shop-products-list/shop-products-list.component';
+import { ShopProductDetailsComponent } from './components/shop-product-details/shop-product-details.component';
 
 export const routes: Routes = [
     {
@@ -60,7 +61,9 @@ export const routes: Routes = [
             { path: 'information', component: InformationPageComponent},
             { path: 'contact', component: ContactPageComponent },
             { path: 'thank-you-message', component: ThankYouMessageCustomerServiceComponent },
-            { path: 'search', component: ShopProductsListComponent }
+            { path: 'search', component: ShopProductsListComponent },
+            { path: 'product-details' , component: ShopProductDetailsComponent }
+
         ]
     },
     {

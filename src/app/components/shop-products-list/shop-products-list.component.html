@@ -1,56 +1,47 @@
 <main>
   <!-- Container for large screen layout -->
-  <div class="container mt-4 d-none d-lg-block">
+  <div class="container mt-4 d-none d-lg-block desktop-layout">
     <div class="row">
       <div class="col-lg-3">
-        <app-shop-products-filter (applyFilters)="applyFilters($event)">
+        <!-- <app-shop-products-filter 
+        [selectedCategoryId]="categoryIdFromParams"
+        [selectedGenderTypeId] = "genderTypeFromParams"
+        (applyFilters)="applyFilters($event)">
+        </app-shop-products-filter> -->
+
+         <app-shop-products-filter
+          [filters]="currentFilters"
+        (applyFilters)="applyFilters($event)">
         </app-shop-products-filter>
+
+
       </div>
 
       <div class="col-lg-9">
+        <div class="d-flex justify-content-end align-items-center mb-3 sort-container">
+          <mat-form-field appearance="outline" class="sort-select">
+            <mat-label>Sort by</mat-label>
+            <mat-select [(value)]="selectedSortOption" (selectionChange)="onSortOptionChanged()">
+              <mat-option value="nameAsc">Name asc.</mat-option>
+              <mat-option value="nameDesc">Name desc.</mat-option>
+              <mat-option value="priceLow">Price lowest</mat-option>
+              <mat-option value="priceHigh">Price highest</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
         <div *ngIf="!products || products.length === 0" class="no-products-message text-center">
           <h3>No products found.</h3>
         </div>
+
         <div class="row" *ngIf="products && products.length > 0">
           <div *ngFor="let product of products" class="col-lg-4 col-md-6 col-sm-6 mb-4">
-            <!-- <mat-card class="product-card" (click)="viewProductDetails(product.id)">
-              <ng-container *ngIf="hasImage(product); else noImageTemplate">
-                <img 
-                  mat-card-image 
-                  [src]="getFirstImage(product)" 
-                  alt="{{ product.name }}"
-                >
-              </ng-container>
-
-              <ng-template #noImageTemplate>
-                <div class="no-image-placeholder">
-                  No image available
-                </div>
-              </ng-template>
-
-              <mat-card-content>
-                <h2 class="product-name">{{ product.name }}</h2>
-                <p class="price">
-                  <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price" class="original-price">
-                    €{{ product.price }}
-                  </span>
-                  <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price" class="discount-price">
-                    €{{ product.discountedPrice }}
-                  </span>
-                  <span *ngIf="product.discountedPrice == null || product.discountedPrice >= product.price">
-                    €{{ product.price }}
-                  </span>
-                </p>
-              </mat-card-content>
-            </mat-card> -->
             <mat-card class="product-card" [class.disabled-card]="product.quantity === 0"
               (click)="product.quantity > 0 && viewProductDetails(product.id)">
-
-                <span 
-                  *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
-                  class="discount-badge">
-                  -{{ calculateDiscountPercentage(product.price, product.discountedPrice) }}%
-                    </span>
+              <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
+                class="discount-badge">
+                -{{ calculateDiscountPercentage(product.price, product.discountedPrice) }}%
+              </span>
 
               <ng-container *ngIf="hasImage(product); else noImageTemplate">
                 <img mat-card-image [src]="getFirstImage(product)" alt="{{ product.name }}">
@@ -64,107 +55,103 @@
                 <h2 class="product-name">{{ product.name }}</h2>
                 <p class="price">
                   <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
-                    class="original-price">
-                    €{{ product.price }}
-                  </span>
+                    class="original-price">€{{ product.price }}</span>
                   <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
-                    class="discount-price">
-                    €{{ product.discountedPrice }}
-                  </span>
+                    class="discount-price">€{{ product.discountedPrice }}</span>
                   <span *ngIf="product.discountedPrice == null || product.discountedPrice >= product.price">
-                    €{{ product.price }}
-                  </span>
+                    €{{ product.price }}</span>
                 </p>
-                <p class="out-of-stock-text" *ngIf="product.quantity === 0">
-                  Out of stock
-                </p>
+                <p class="out-of-stock-text" *ngIf="product.quantity === 0">Out of stock</p>
               </mat-card-content>
             </mat-card>
           </div>
+        </div>
+
+        <!-- Spacer div to push paginator down on desktop -->
+        <div class="paginator-spacer d-none d-lg-block"></div>
+
+        <div class="d-flex justify-content-center mt-4" *ngIf="products && products.length > 0">
+          <mat-paginator
+            [length]="totalProducts"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[10, 15, 24]"
+            (page)="onPageChange($event)">
+          </mat-paginator>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Button to open filter on small screens -->
-  <!-- <div class="d-lg-none text-center mt-3">
-    <button mat-raised-button color="primary" (click)="drawer.toggle()">
-      Filter
-    </button>
-  </div> -->
-
   <!-- Drawer container for small screens -->
   <mat-drawer-container class="d-lg-none" style="height: 100vh;">
-
     <mat-drawer #drawer mode="over">
       <div class="drawer-content">
-        <app-shop-products-filter [showTitle]="true" (applyFilters)="applyFilters($event,drawer)">
+        <app-shop-products-filter [showTitle]="true" (applyFilters)="applyFilters($event, drawer)">
         </app-shop-products-filter>
       </div>
     </mat-drawer>
 
     <div mat-drawer-content>
-      <!-- <div class="text-center mt-3">
-      <button mat-raised-button color="primary" (click)="drawer.toggle()">
-        Filter
-      </button>
-    </div> -->
-      <div class="d-flex justify-content-start mt-3 ps-3">
-        <button mat-button  (click)="drawer.toggle()">
-           Filters  <mat-icon>tune</mat-icon>         
-        </button>
+      <div class="d-flex align-items-center justify-content-between px-3 mt-3 flex-wrap mobile-filter-sort-container">
+        <button mat-button (click)="drawer.toggle()">Filters <mat-icon>tune</mat-icon></button>
+
+        <mat-form-field appearance="outline" class="sort-select-mobile">
+          <mat-label>Sort by</mat-label>
+          <mat-select [(value)]="selectedSortOption" (selectionChange)="onSortOptionChanged()">
+            <mat-option value="nameAsc">Name asc.</mat-option>
+            <mat-option value="nameDesc">Name desc.</mat-option>
+            <mat-option value="priceLow">Price lowest</mat-option>
+            <mat-option value="priceHigh">Price highest</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
-    </div>
+      <div class="container mt-4">
+        <div *ngIf="!products || products.length === 0" class="no-products-message text-center">
+          <h3>No products found.</h3>
+        </div>
 
-    <div class="container mt-4">
-
-      <div *ngIf="!products || products.length === 0" class="no-products-message text-center">
-        <h3>No products found.</h3>
-      </div>
-
-      <div class="row" *ngIf="products && products.length > 0">
-        <div *ngFor="let product of products" class="col-12 col-md-6 mb-4">
-          <!-- <mat-card class="product-card" (click)="viewProductDetails(product.id)"> -->
-             <mat-card class="product-card" [class.disabled-card]="product.quantity === 0"
+        <div class="row" *ngIf="products && products.length > 0">
+          <div *ngFor="let product of products" class="col-12 col-md-6 mb-4">
+            <mat-card class="product-card" [class.disabled-card]="product.quantity === 0"
               (click)="product.quantity > 0 && viewProductDetails(product.id)">
+              <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
+                class="discount-badge">
+                -{{ calculateDiscountPercentage(product.price, product.discountedPrice) }}%
+              </span>
 
-             <span 
-                  *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
-                  class="discount-badge">
-                  -{{ calculateDiscountPercentage(product.price, product.discountedPrice) }}%
-                    </span>
+              <ng-container *ngIf="hasImage(product); else noImageTemplate">
+                <img mat-card-image [src]="getFirstImage(product)" alt="{{ product.name }}">
+              </ng-container>
 
-            <ng-container *ngIf="hasImage(product); else noImageTemplate">
-              <img mat-card-image [src]="getFirstImage(product)" alt="{{ product.name }}">
-            </ng-container>
+              <ng-template #noImageTemplate>
+                <div class="no-image-placeholder">No image available</div>
+              </ng-template>
 
-            <ng-template #noImageTemplate>
-              <div class="no-image-placeholder">
-                No image available
-              </div>
-            </ng-template>
+              <mat-card-content>
+                <h2 class="product-name">{{ product.name }}</h2>
+                <p class="price">
+                  <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
+                    class="original-price">€{{ product.price }}</span>
+                  <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
+                    class="discount-price">€{{ product.discountedPrice }}</span>
+                  <span *ngIf="product.discountedPrice == null || product.discountedPrice >= product.price">
+                    €{{ product.price }}</span>
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
 
-            <mat-card-content>
-              <h2 class="product-name">{{ product.name }}</h2>
-              <p class="price">
-                <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
-                  class="original-price">
-                  €{{ product.price }}
-                </span>
-                <span *ngIf="product.discountedPrice != null && product.discountedPrice < product.price"
-                  class="discount-price">
-                  €{{ product.discountedPrice }}
-                </span>
-                <span *ngIf="product.discountedPrice == null || product.discountedPrice >= product.price">
-                  €{{ product.price }}
-                </span>
-              </p>
-            </mat-card-content>
-          </mat-card>
+        <div class="d-flex justify-content-center mt-4 mb-5" *ngIf="products && products.length > 0">
+          <mat-paginator
+            [length]="totalProducts"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[10, 15, 20]"
+            (page)="onPageChange($event)">
+          </mat-paginator>
         </div>
       </div>
     </div>
   </mat-drawer-container>
-
 </main>

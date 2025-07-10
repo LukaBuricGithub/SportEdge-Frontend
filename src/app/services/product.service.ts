@@ -8,6 +8,7 @@ import { UpdateProductRequestDTO } from '../models/UpdateProductRequestDTO';
 import { ProductVariationDTO } from '../models/ProductVariationDTO';
 import { UpdateMultipleProductVariationsRequestDto } from '../models/UpdateMultipleProductVariationsRequestDto';
 import { ProductFilterDto } from '../models/ProductFilterDto';
+import { FilteredProductsResultDto } from '../models/FilteredProductsResultDto';
 
 @Injectable({
   providedIn: 'root'
@@ -95,37 +96,85 @@ export class ProductService {
   }
 
 
-  getProductsBySearchTerm(searchTerm: string): Observable<ProductDTO[]> 
-  {
+  //getProductsBySearchTerm(searchTerm: string): Observable<ProductDTO[]> 
+  //{
+    /*
     if (!searchTerm || searchTerm.trim() === '')
     {
       return this.http.get<ProductDTO[]>(this.baseUrl);
-    }
+    }*/
+    //const params = new HttpParams().set('searchTerm', searchTerm);
+    //return this.http.get<ProductDTO[]>(`${this.baseUrl}/search`, { params });
+  //}
+
+
+  getProductsBySearchTerm(searchTerm: string, filter: ProductFilterDto): Observable<FilteredProductsResultDto> 
+  {
     const params = new HttpParams().set('searchTerm', searchTerm);
-    return this.http.get<ProductDTO[]>(`${this.baseUrl}/search`, { params });
+    return this.http.post<FilteredProductsResultDto>(`${this.baseUrl}/search`, filter, { params });
   }
 
-
-  getProductsByFilter(filter: ProductFilterDto): Observable<ProductDTO[]> 
-  {
-    return this.http.post<ProductDTO[]>(`${this.baseUrl}/filter`, filter);
-  }
-
-  getProductsByCategory(categoryId: number): Observable<ProductDTO[]> 
-  {
-      const url = `${this.baseUrl}/search-category`;
-      return this.http.get<ProductDTO[]>(url, {
-        params: {
-        categoryId: categoryId.toString()
-        }
-      });
-  }
-
-
-  getProductsByGenderTypeName(name: string): Observable<ProductDTO[]> 
+  getProductsByGenderTypeName(name: string, filter: ProductFilterDto): Observable<FilteredProductsResultDto> 
   {
     const url = `${this.baseUrl}/search-gender-type`;
-    return this.http.get<ProductDTO[]>(url, {
+    return this.http.post<FilteredProductsResultDto>(url, filter, {
+      params: {
+        name: name
+      }
+    });
+  }
+
+  getFilteredProducts(filter: ProductFilterDto): Observable<FilteredProductsResultDto> 
+  {
+    return this.http.post<FilteredProductsResultDto>(`${this.baseUrl}/filter-products`, filter);
+  }
+
+  // getProductsByFilter(filter: ProductFilterDto): Observable<ProductDTO[]> 
+  // {
+  //   return this.http.post<ProductDTO[]>(`${this.baseUrl}/filter`, filter);
+  // }
+
+  getProductsByFilter(filter: ProductFilterDto): Observable<FilteredProductsResultDto> 
+  {
+    return this.http.post<FilteredProductsResultDto>(`${this.baseUrl}/filter`, filter);
+  }
+
+  // getProductsByCategory(categoryId: number): Observable<ProductDTO[]> 
+  // {
+  //     const url = `${this.baseUrl}/search-category`;
+  //     return this.http.get<ProductDTO[]>(url, {
+  //       params: {
+  //       categoryId: categoryId.toString()
+  //       }
+  //     });
+  // }
+
+
+  getProductsByCategory(categoryId: number, filter: ProductFilterDto): Observable<FilteredProductsResultDto> {
+  const url = `${this.baseUrl}/search-category`;
+  return this.http.post<FilteredProductsResultDto>(url, filter, {
+    params: {
+      categoryId: categoryId.toString()
+    }
+  });
+}
+
+
+
+  // getProductsByGenderTypeName(name: string): Observable<ProductDTO[]> 
+  // {
+  //   const url = `${this.baseUrl}/search-gender-type`;
+  //   return this.http.get<ProductDTO[]>(url, {
+  //     params: {
+  //       name: name
+  //     }
+  //   });
+  // }
+
+  getGenderIdByGenderName(name:string) : Observable<number>
+  {
+    const url = `${this.baseUrlGenderCategory}/gender-type-id`;
+      return this.http.get<number>(url, {
       params: {
         name: name
       }

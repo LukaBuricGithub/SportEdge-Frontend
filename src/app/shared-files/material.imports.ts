@@ -20,6 +20,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 export const MaterialModules = [
@@ -43,5 +44,6 @@ export const MaterialModules = [
   MatDividerModule,
   MatSelectModule,
   MatCardModule,
-  MatSliderModule
+  MatSliderModule,
+  MatTabsModule
 ];
