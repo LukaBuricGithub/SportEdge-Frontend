@@ -54,7 +54,7 @@
       </div>
 
       <span matTooltip="Out of stock" [matTooltipDisabled]="product.quantity !== 0">
-      <button mat-raised-button class="w-100" color="primary" [disabled]="!selectedVariationId || product.quantity === 0" (click)="addToCart()">
+      <button mat-flat-button class="w-100" color="primary" [disabled]="!selectedVariationId || product.quantity === 0" (click)="addToCart()">
         <span class="material-icons me-2">shopping_cart</span>
         Add to Cart
       </button>

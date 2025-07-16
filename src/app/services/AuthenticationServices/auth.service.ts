@@ -50,7 +50,13 @@ export class AuthService {
 
   getUserId(): number | null {
     const payload = this.decodeToken();
-    return payload ? parseInt(payload.sub) : null;
+
+    if (!payload) return null;
+
+    const now = Math.floor(Date.now() / 1000);
+    if (payload.exp <= now) return null;
+
+    return parseInt(payload.sub);
   }
 
   getUserRole(): string | null {
@@ -64,11 +70,20 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+    // const payload = this.decodeToken();
+    // if (!payload) return false;
+
+    // const now = Math.floor(Date.now() / 1000);
+    // return payload.exp > now;
     const payload = this.decodeToken();
     if (!payload) return false;
 
     const now = Math.floor(Date.now() / 1000);
-    return payload.exp > now;
+    const expired = payload.exp <= now;
+
+    if (expired) this.logout();
+
+    return !expired;
   }
 
   logout(): void {

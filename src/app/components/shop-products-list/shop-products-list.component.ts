@@ -36,6 +36,7 @@ export class ShopProductsListComponent implements OnInit {
   pageSize = 10;
   totalProducts = 0;
   currentPage = 0;
+  loading = true;
 
   //categoryIdFromParams: number | null = null;
 
@@ -107,6 +108,9 @@ export class ShopProductsListComponent implements OnInit {
 }
 
 loadProducts() {
+
+  this.loading = true;
+
   this.currentFilters.pageNumber = this.currentPage + 1;
   this.currentFilters.pageSize = this.pageSize;
   //this.currentFilters.sortBy = this.selectedSortOption;
@@ -114,7 +118,12 @@ loadProducts() {
   this.productService.getFilteredProducts(this.currentFilters).subscribe(res => {
     this.products = res.products;
     this.totalProducts = res.totalCount;
-  });
+    this.loading = false;
+  }, err => {
+    this.loading = false;
+    console.log(err)
+  }
+);
 }
 
   viewProductDetails(productId: number): void {

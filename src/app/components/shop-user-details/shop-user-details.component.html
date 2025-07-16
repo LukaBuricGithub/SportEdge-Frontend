@@ -50,7 +50,7 @@
           </div>
 
           <div class="button-container">
-            <button mat-raised-button class="orange-button" type="button" (click)="onUpdate(user.id)">
+            <button mat-flat-button class="orange-button" type="button" (click)="onUpdate(user.id)">
               <mat-icon>edit</mat-icon>
               Update personal data
             </button>
@@ -92,7 +92,7 @@
                   <th mat-header-cell *matHeaderCellDef> Actions </th>
                   <td mat-cell *matCellDef="let row">
                     <div class="button-container-table">
-                      <button mat-raised-button color="primary" (click)="downloadOrderPdf(row.id)">
+                      <button mat-flat-button color="primary" (click)="downloadOrderPdf(row.id)">
                         <mat-icon>picture_as_pdf</mat-icon>
                         Download PDF
                       </button>

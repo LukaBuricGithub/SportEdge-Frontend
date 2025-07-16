@@ -30,7 +30,12 @@ export class ShopShoppingCartComponent implements OnInit {
   quantityOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   imageBaseUrl = AppConstants.imageBaseUrl;
-  emptyImage = AppConstants.defaultProductImage
+  emptyImage = AppConstants.defaultProductImage;
+
+  loading = true;
+
+
+
 
 
   constructor(private cartService: ShoppingCartService, private authService: AuthService,
@@ -50,34 +55,116 @@ export class ShopShoppingCartComponent implements OnInit {
       }   
   }
 
-  // loadCart(): void {
-  //   this.cartService.getCart(this.userId).subscribe({
-  //     next: (data) => this.cart = data,
-  //     error: (err) => console.error(err)
-  //   });
-  // }
   loadCart(): void {
+  this.loading = true;
   this.cartService.getCart(this.userId).subscribe({
     next: (data) => {
       this.cart = data;
 
-      // Load images
-      this.cart.cartItems.forEach(item => {
-        if (item.productId) { // Assuming you have added productId to DTO
-          this.productService.getProductById(item.productId).subscribe(product => {
-            const filename = product.imageFilenames[0];
-            item.imageUrl = filename 
-              ? `${this.imageBaseUrl}${filename}`
-              : this.emptyImage;
+      const imagePromises = this.cart.cartItems.map(item => {
+        if (item.productId) {
+          return this.productService.getProductById(item.productId).toPromise().then(product => {
+            if (product && product.imageFilenames && product.imageFilenames.length > 0) {
+              const filename = product.imageFilenames[0];
+              item.imageUrl = `${this.imageBaseUrl}${filename}`;
+            } else {
+              item.imageUrl = this.emptyImage;
+            }
+          }).catch(() => {
+            item.imageUrl = this.emptyImage;
           });
         } else {
           item.imageUrl = this.emptyImage;
+          return Promise.resolve();
         }
       });
+
+      Promise.all(imagePromises).then(() => {
+        this.loading = false;
+      });
     },
-    error: (err) => console.error(err)
+    error: (err) => {
+      console.error(err);
+      this.loading = false;
+    }
   });
 }
+
+
+
+//   loadCart(): void {
+//   this.loading = true;
+//   this.cartService.getCart(this.userId).subscribe({
+//     next: (data) => {
+//       this.cart = data;
+//       const imagePromises = this.cart.cartItems.map(item => {
+//         if (item.productId) {
+//           return this.productService.getProductById(item.productId).toPromise().then(product => {
+//             const filename = product.imageFilenames[0];
+//             item.imageUrl = filename ? `${this.imageBaseUrl}${filename}` : this.emptyImage;
+//           });
+//         } else {
+//           item.imageUrl = this.emptyImage;
+//           return Promise.resolve();
+//         }
+//       });
+//       Promise.all(imagePromises).then(() => {
+//         this.loading = false;
+//       });
+//     },
+//     error: (err) => {
+//       console.error(err);
+//       this.loading = false;
+//     }
+//   });
+// }
+
+//   loadCart(): void {
+//   this.cartService.getCart(this.userId).subscribe({
+//     next: (data) => {
+//       this.cart = data;
+
+//       this.cart.cartItems.forEach(item => {
+//         if (item.productId) { // Assuming you have added productId to DTO
+//           this.productService.getProductById(item.productId).subscribe(product => {
+//             const filename = product.imageFilenames[0];
+//             item.imageUrl = filename 
+//               ? `${this.imageBaseUrl}${filename}`
+//               : this.emptyImage;
+//           });
+//         } else {
+//           item.imageUrl = this.emptyImage;
+//         }
+//       });
+//     },
+//     error: (err) => console.error(err)
+//   });
+// }
+
+
+
+//   loadCart(): void {
+//   this.loading = true;
+//   this.cartService.getCart(this.userId).subscribe({
+//     next: (data) => {
+//       this.cart = data;
+
+//       this.cart.cartItems.forEach(item => {
+//         if (item.productId) { // Assuming you have added productId to DTO
+//           this.productService.getProductById(item.productId).subscribe(product => {
+//             const filename = product.imageFilenames[0];
+//             item.imageUrl = filename 
+//               ? `${this.imageBaseUrl}${filename}`
+//               : this.emptyImage;
+//           });
+//         } else {
+//           item.imageUrl = this.emptyImage;
+//         }
+//       });
+//     },
+//     error: (err) => console.error(err)
+//   });
+// }
 
 
   clearCart(): void 
@@ -94,14 +181,28 @@ export class ShopShoppingCartComponent implements OnInit {
     }
 
     this.cartService.updateItem(this.userId, item.productVariationId, newQty).subscribe({
-      next: () => this.loadCart(),
-      error: (err) => console.error(err)
+      // next: () => this.loadCart(),
+      next: () => 
+        {
+          item.quantity = quantity;
+        },
+      error: (err) => {
+      console.error(err);
+          this.snackBar.open('Selected quantity exceeds the amount in storage', 'Close', {
+          duration: 4000,
+          panelClass: ['error-snackbar']
+        });
+      this.loadCart(); 
+      }
     });
   }
 
   removeItem(item: CartItemDTO): void {
     this.cartService.removeItem(this.userId, item.productVariationId).subscribe({
-      next: () => this.loadCart(),
+      // next: () => this.loadCart(),
+      next: () => {
+      this.cart.cartItems = this.cart.cartItems.filter(i => i.productVariationId !== item.productVariationId);
+    },
       error: (err) => console.error(err)
     });
   }
@@ -119,12 +220,6 @@ onQuantityChange(event: MatSelectChange, item: CartItemDTO) {
   this.updateQuantity(item, newQuantity);
 }
 
-
-// onQuantityChange(event: Event, item: CartItemDTO) {
-//   const selectElement = event.target as HTMLSelectElement;
-//   const newQuantity = Number(selectElement.value);
-//   this.updateQuantity(item, newQuantity);
-// }
 
 getCartTotal(): number {
   return this.cart?.cartItems.reduce((sum, item) => sum + item.priceAtTime * item.quantity, 0) || 0;

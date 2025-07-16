@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { AuthService } from '../../services/AuthenticationServices/auth.service';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
 
 
 
@@ -74,7 +75,7 @@ export class ShopProductDetailsComponent implements OnInit {
   };
 
   constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
-    private snackBar:MatSnackBar, private authService:AuthService) { }
+    private snackBar:MatSnackBar, private authService:AuthService, private cartService:ShoppingCartService) { }
 
 ngOnInit() {
 
@@ -106,15 +107,16 @@ ngOnInit() {
 }
 
 
-  addToCart() {
+  addToCart() : void {
 
-    const id = this.authService.getUserId();
-    if (id === null) 
+    const userId = this.authService.getUserId();
+    console.log('User ID:', userId);
+    if (userId === null) 
     {
         this.snackBar.open('To continue shopping please log in', 'Close', {
             duration: 4000,
       });
-      return 
+      return; 
     } 
 
     const variation = this.product.variations.find(v => v.id === this.selectedVariationId);
@@ -124,7 +126,23 @@ ngOnInit() {
         variationId: variation.id,
         size: variation.sizeOptionName,
       });
-      // You can call your cart service here
+      
+    const quantity = 1;
+
+    this.cartService.addItem(userId, variation.id, quantity).subscribe({
+      next: () => {
+        this.snackBar.open('Product successfully added to cart!', 'Close', {
+        duration: 4000,
+      });
+    },
+    error: (err) => {
+      console.error('Error adding product to cart:', err);
+      this.snackBar.open('Error adding product to cart. Please try again.', 'Close', {
+        duration: 4000,
+        panelClass: ['error-snackbar']
+      });
+    },
+  });
     }
   }
 
