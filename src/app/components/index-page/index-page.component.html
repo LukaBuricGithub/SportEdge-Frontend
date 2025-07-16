@@ -6,7 +6,6 @@
     </p>
     </div>
 
-<!-- Owl carousel --> 
 <div class="image-gallery-container">
 <owl-carousel-o [options]="carouselOptions">
   <ng-template carouselSlide *ngFor="let img of images; let i = index">
@@ -15,7 +14,6 @@
 </owl-carousel-o>
 </div>
 
-<!-- Lightbox overlay -->
 <div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="closeLightbox()">
   <div class="lightbox-content" (click)="$event.stopPropagation()">
     <span class="close-button" (click)="closeLightbox()">&times;</span>

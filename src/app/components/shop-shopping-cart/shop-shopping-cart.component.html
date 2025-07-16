@@ -1,0 +1,89 @@
+<div class="container my-4">
+  <div class="card p-3">
+    <div>
+      <h2>Your Shopping Cart</h2>
+    </div>
+
+    <div *ngIf="cart?.cartItems && cart.cartItems.length > 0; else emptyCart">
+
+      <div *ngFor="let item of cart.cartItems" class="row align-items-center border-bottom py-3 gx-2">
+        <!-- Image -->
+        <div class="col-12 col-4 col-md-2">
+            <a [routerLink]="['/shop/product-details']" [queryParams]="{ productId: item.productId }">
+          <img 
+            [src]="item.imageUrl" 
+            [alt]="item.productName" 
+            class="img-fluid rounded"
+            style="max-width: 80px;"
+          >
+        </a>
+        </div>
+
+        <!-- Name -->
+        <div class="col-12 col-8 col-md-4 fw-bold">
+          <a [routerLink]="['/shop/product-details']" [queryParams]="{ productId: item.productId }" class="text-decoration-none text-dark fw-bold">
+            {{ item.productName }}
+            </a>
+        </div>
+
+        <!-- Size -->
+        <div class="col-6 col-md-1">
+          <span class="text-muted">Size: {{ item.sizeOptionName }}</span>
+        </div>
+
+        <!-- Price -->
+        <div class="col-6 col-md-1">
+          <span>{{ item.priceAtTime | currency:'EUR':'symbol':'1.2-2' }}</span>
+        </div>
+
+        <!-- Quantity -->
+        <div class="col-12 col-md-2">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-select  
+              [value]="item.quantity" 
+              (selectionChange)="onQuantityChange($event, item)">
+              <mat-option *ngFor="let q of quantityOptions" [value]="q">
+                {{ q }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Total -->
+        <div class="col-6 col-md-1 fw-semibold text-end" style="min-width: 90px;">
+          {{ item.priceAtTime * item.quantity | currency:'EUR':'symbol':'1.2-2' }}
+        </div>
+
+        <!-- Remove button -->
+        <div class="col-6 col-md-1" style="min-width: 60px;">
+          <button mat-icon-button color="warn" disableRipple class="icon-button" (click)="removeItem(item)" aria-label="Remove item">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="row mt-4">
+        <div class="col text-end">
+          <h4>
+            Total: {{ getCartTotal() | currency:'EUR':'symbol':'1.2-2' }}
+          </h4>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col text-end">
+          <button class="btn btn-danger" (click)="clearCart()">Clear Cart</button>
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #emptyCart>
+      <div class="text-center my-4">
+        <h4>Your shopping cart is empty.</h4>
+      </div>
+    </ng-template>
+
+  </div>
+</div>

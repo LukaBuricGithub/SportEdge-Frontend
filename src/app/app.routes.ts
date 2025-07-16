@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { AdminGuard } from './services/AuthenticationServices/AdminGuard';
+import { CustomerGuard } from './services/AuthenticationServices/CustomerGuard';
 
 
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
@@ -37,9 +39,14 @@ import { AboutPageComponent } from './components/about-page/about-page.component
 import { InformationPageComponent } from './components/information-page/information-page.component';
 import { ContactPageComponent } from './components/contact-page/contact-page.component';
 import { ThankYouMessageCustomerServiceComponent } from './components/thank-you-message-customer-service/thank-you-message-customer-service.component';
+import { NotAuthorizedMessageComponent } from './components/not-authorized-message/not-authorized-message.component';
 
 import { ShopProductsListComponent } from './components/shop-products-list/shop-products-list.component';
 import { ShopProductDetailsComponent } from './components/shop-product-details/shop-product-details.component';
+
+import { ShopUserDetailsComponent } from './components/shop-user-details/shop-user-details.component';
+import { ShopUserUpdateComponent } from './components/shop-user-update/shop-user-update.component';
+import { ShopShoppingCartComponent } from './components/shop-shopping-cart/shop-shopping-cart.component';
 
 export const routes: Routes = [
     {
@@ -61,14 +68,27 @@ export const routes: Routes = [
             { path: 'information', component: InformationPageComponent},
             { path: 'contact', component: ContactPageComponent },
             { path: 'thank-you-message', component: ThankYouMessageCustomerServiceComponent },
+            { path: 'access-denied', component: NotAuthorizedMessageComponent },
             { path: 'search', component: ShopProductsListComponent },
             { path: 'product-details' , component: ShopProductDetailsComponent }
 
         ]
     },
     {
+        path:'customer',
+        component:MainLayoutComponent,
+        canActivate: [CustomerGuard],
+        children: [
+            { path: '', component: ShopUserDetailsComponent },
+            { path: 'profile', component: ShopUserDetailsComponent },
+            { path: 'update-profile', component: ShopUserUpdateComponent },
+            { path: 'shopping-cart', component: ShopShoppingCartComponent }
+        ]
+    },
+    {
         path:'admin',
         component:AdminLayoutComponent,
+        canActivate: [AdminGuard],
         children: [
             { path: '', component: AdministratorBrandContentComponent },
             { path: 'index', component: IndexPageComponent },

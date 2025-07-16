@@ -32,31 +32,6 @@ export class UpdateProductComponent implements OnInit {
     private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar) {}
 
 
-
-/**
- *   constructor(private router:Router,private productService:ProductService,private route:ActivatedRoute,private dialog:MatDialog,
-  private snackBar:MatSnackBar) {}
-  
-  productId!:number;
-  product!:ProductDTO;
-
-
-  ngOnInit(): void 
-  {
-      this.route.queryParams.subscribe(params => {
-      this.productId = +params['productId'];
-      console.log('Received productId:', this.productId);
-
-      this.productService.getProductById(this.productId).subscribe((x:ProductDTO) => {
-        this.product = x
-      });
-    });
-
-  }
- * 
- */
-
-
   ngOnInit(): void 
   {
     this.updateProductForm = this.fb.group({

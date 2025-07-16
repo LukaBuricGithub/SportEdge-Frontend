@@ -96,18 +96,6 @@ export class ProductService {
   }
 
 
-  //getProductsBySearchTerm(searchTerm: string): Observable<ProductDTO[]> 
-  //{
-    /*
-    if (!searchTerm || searchTerm.trim() === '')
-    {
-      return this.http.get<ProductDTO[]>(this.baseUrl);
-    }*/
-    //const params = new HttpParams().set('searchTerm', searchTerm);
-    //return this.http.get<ProductDTO[]>(`${this.baseUrl}/search`, { params });
-  //}
-
-
   getProductsBySearchTerm(searchTerm: string, filter: ProductFilterDto): Observable<FilteredProductsResultDto> 
   {
     const params = new HttpParams().set('searchTerm', searchTerm);
@@ -129,26 +117,11 @@ export class ProductService {
     return this.http.post<FilteredProductsResultDto>(`${this.baseUrl}/filter-products`, filter);
   }
 
-  // getProductsByFilter(filter: ProductFilterDto): Observable<ProductDTO[]> 
-  // {
-  //   return this.http.post<ProductDTO[]>(`${this.baseUrl}/filter`, filter);
-  // }
 
   getProductsByFilter(filter: ProductFilterDto): Observable<FilteredProductsResultDto> 
   {
     return this.http.post<FilteredProductsResultDto>(`${this.baseUrl}/filter`, filter);
   }
-
-  // getProductsByCategory(categoryId: number): Observable<ProductDTO[]> 
-  // {
-  //     const url = `${this.baseUrl}/search-category`;
-  //     return this.http.get<ProductDTO[]>(url, {
-  //       params: {
-  //       categoryId: categoryId.toString()
-  //       }
-  //     });
-  // }
-
 
   getProductsByCategory(categoryId: number, filter: ProductFilterDto): Observable<FilteredProductsResultDto> {
   const url = `${this.baseUrl}/search-category`;
@@ -158,18 +131,6 @@ export class ProductService {
     }
   });
 }
-
-
-
-  // getProductsByGenderTypeName(name: string): Observable<ProductDTO[]> 
-  // {
-  //   const url = `${this.baseUrl}/search-gender-type`;
-  //   return this.http.get<ProductDTO[]>(url, {
-  //     params: {
-  //       name: name
-  //     }
-  //   });
-  // }
 
   getGenderIdByGenderName(name:string) : Observable<number>
   {

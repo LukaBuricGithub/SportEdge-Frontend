@@ -1,3 +1,12 @@
+.minimum-height
+{
+  min-height: 920px;
+}
+.product-content
+{
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
 img {
   max-width: 100%;
   height: auto;
@@ -33,62 +42,54 @@ img {
   justify-content: center;
 }
 
+
 .lightbox-image {
   width: 100%;
   max-width: 800px;
-  height: auto;
+  height: 500px; 
   object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
 
 .close-button {
   position: absolute;
   top: 10px;
   right: 20px;
-  color: white;
+  color:#333;
   font-size: 2rem;
   cursor: pointer;
+  z-index: 1001;
 }
 
-.owl-theme .owl-nav 
-{
-    background-color: red !important;
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background: none;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
 }
 
-// .nav-button {
-//   appearance: none;
-//   -webkit-appearance: none;
-//   background: transparent;
-//   border: none;
-//   color: white;
-//   font-size: 2rem;
-//   cursor: pointer;
-//   position: absolute;
-//   top: 50%;
-//   transform: translateY(-50%);
-//   padding: 0 10px;
-//   transition: color 0.3s;
-// }
+.nav-button.left {
+  left: 10px;
+}
 
-// .nav-button.left {
-//   left: 0;
-// }
+.nav-button.right {
+  right: 10px;
+}
 
-// .nav-button.right {
-//   right: 0;
-// }
+.owl-carousel .owl-item img {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
-// .nav-button:hover {
-//   color: #ddd;
-// }
-
-// .nav-button:focus {
-//   outline: none;
-// }
-
-
-
-
-
+.owl-carousel .owl-item img:hover {
+  transform: scale(1.05);
+}
 
 .product-thumbnail {
   width: 100px;
@@ -96,4 +97,118 @@ img {
   object-fit: cover;
   margin: 5px;
   cursor: pointer;
+}
+
+
+@media (max-width: 576px) {
+  .image-gallery {
+    height: 300px;
+  }
+}
+
+.price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+
+@media (max-width: 480px) {
+  .price-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .price-text {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .discount-badge-inline {
+    margin-left: 0;
+    margin-top: 4px;
+  }
+}
+
+
+.price-text {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.discounted-price {
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.discount-badge-inline {
+  margin-left: 8px;
+  background-color: #d32f2f;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.original-price-sup {
+  color: #888;
+  text-decoration: line-through;
+  font-size: 1rem;
+  margin-left: 5px;
+}
+
+@media (max-width: 480px) {
+  .price-text {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .price-text > * {
+    margin-top: 15px;
+  }
+
+  .price-text > *:first-child {
+    margin-top: 0;
+  }
+
+  .original-price-sup {
+    margin-left: 0; 
+    margin-top: 0; 
+  }
+
+  .discount-badge-inline {
+    margin-left: 0;
+  }
+}
+
+
+
+.chips-set-style 
+{
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.size-option-select-style
+{
+  margin-top: 5px;
+}
+
+.label-style 
+{
+  margin-left: 2px;
+  color: #333;
+}
+
+.mat-mdc-form-field.ng-valid.ng-touched {
+  --mdc-outlined-text-field-outline-color: #3f51b5;
+  --mdc-outlined-text-field-hover-outline-color: #3f51b5;
+  --mdc-outlined-text-field-focus-outline-color: #3f51b5;
+}
+
+.mat-expansion-panel{
+    box-shadow: none !important;
 }

@@ -23,6 +23,9 @@ import { FilteredProductsResultDto } from '../../models/FilteredProductsResultDt
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { AuthService } from '../../services/AuthenticationServices/auth.service';
+
 
 
 
@@ -35,6 +38,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 })
 export class ShopProductDetailsComponent implements OnInit {
  
+  isStacked = false;
+  
   productId!:number;
   product!: ProductDTO;
   mainImageUrl!: string;
@@ -54,7 +59,7 @@ export class ShopProductDetailsComponent implements OnInit {
   carouselOptions: OwlOptions = {
     loop: true,
     margin: 10,
-    nav: true,
+    nav: false,
     dots: true,
     autoplay: false,
     navText: [
@@ -68,15 +73,29 @@ export class ShopProductDetailsComponent implements OnInit {
     },
   };
 
-  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute, private breakpointObserver: BreakpointObserver,
+    private snackBar:MatSnackBar, private authService:AuthService) { }
 
 ngOnInit() {
+
+  this.breakpointObserver.observe(['(max-width: 767.98px)'])
+      .subscribe((state: BreakpointState) => {
+        this.isStacked = state.matches;
+      });
+
   this.route.queryParams.subscribe(params => {
     this.productId = +params['productId'];
     this.productService.getProductById(this.productId).subscribe((x: ProductDTO) => {
       this.product = x;
+      console.log(this.product);
 
-      this.images = this.product.imageFilenames.map(filename => this.imageBaseUrl + filename);
+      //this.images = this.product.imageFilenames.map(filename => this.imageBaseUrl + filename);
+
+      this.images = (this.product.imageFilenames && this.product.imageFilenames.length > 0)
+  ? this.product.imageFilenames.map(filename => this.imageBaseUrl + filename)
+  : [AppConstants.defaultProductImage]; 
+
+      
 
       this.filteredVariations = this.product.variations.filter(v => v.quantityInStock > 0);
 
@@ -88,6 +107,16 @@ ngOnInit() {
 
 
   addToCart() {
+
+    const id = this.authService.getUserId();
+    if (id === null) 
+    {
+        this.snackBar.open('To continue shopping please log in', 'Close', {
+            duration: 4000,
+      });
+      return 
+    } 
+
     const variation = this.product.variations.find(v => v.id === this.selectedVariationId);
     if (variation) {
       console.log('Adding to cart:', {
@@ -99,6 +128,10 @@ ngOnInit() {
     }
   }
 
+  calculateDiscountPercentage(originalPrice: number, discountedPrice: number): number {
+    const discount = 100 - Math.round((discountedPrice / originalPrice) * 100);
+    return discount;
+  }
 
   openLightbox(index: number) {
   this.currentIndex = index;

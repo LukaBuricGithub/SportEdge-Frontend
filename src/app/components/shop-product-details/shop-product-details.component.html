@@ -1,70 +1,99 @@
-<div class="container mt-4">
+<main class="minimum-height">
+  <div class="container mt-4 product-content" *ngIf="product">
   <div class="row">
-    <!-- Images column -->
     <div class="col-md-6">
       <owl-carousel-o [options]="carouselOptions">
-        <ng-template carouselSlide *ngFor="let img of product.imageFilenames">
-          <img class="img-fluid" [src]="imageBaseUrl + img" alt="Product image" />
+        <ng-template carouselSlide *ngFor="let img of images; let i = index">
+          <img class="img-fluid" [src]="img" alt="Product image" (click)="openLightbox(i)" />
         </ng-template>
       </owl-carousel-o>
 
-      <!-- Product images gallery (inside left column) -->
       <div class="product-image-gallery mt-3">
         <img *ngFor="let img of images; let i = index" [src]="img" class="product-thumbnail" (click)="openLightbox(i)" />
       </div>
     </div>
 
-    <!-- Details column -->
     <div class="col-md-6">
       <h2>{{ product.brandName }}</h2>
       <h4>{{ product.name }}</h4>
 
-      <div *ngIf="product.discountedPrice; else regularPrice">
-        <h4>
-          <span class="text-muted text-decoration-line-through">
-            {{ product.price | currency }}
-          </span>
-          <span class="text-danger ms-2">{{ product.discountedPrice | currency }}</span>
-        </h4>
-      </div>
-      <ng-template #regularPrice>
-        <h4>{{ product.price | currency }}</h4>
-      </ng-template>
-
       <div class="mb-3">
-        <label for="sizeSelect">Size</label>
-        <select id="sizeSelect" class="form-select" [(ngModel)]="selectedVariationId">
-          <option *ngFor="let v of filteredVariations" [value]="v.id">
-            {{ v.sizeOptionName }}
-          </option>
-        </select>
+        <mat-chip-set aria-label="Product attributes" class="chips-set-style">
+          <mat-chip color="primary" selected>{{ product.genderName }}</mat-chip>
+          <mat-chip color="accent" selected>{{ product.brandName }}</mat-chip>
+          <mat-chip color="warn" selected *ngFor="let category of product.categoryNames">
+            {{ category }}
+          </mat-chip>
+        </mat-chip-set>
       </div>
 
-      <button mat-raised-button class="w-100" color="primary" [disabled]="!selectedVariationId" (click)="addToCart()">
-        <span class="material-icons me-2">shopping_cart</span>
-        Add to Cart      
-        </button>
-    </div>
-  </div>
+      <div class="price-section">
+        <div *ngIf="product.discountedPrice && product.discountedPrice < product.price" class="price-wrapper">
+          <h4 class="price-text">
+            <span class="discounted-price">{{ product.discountedPrice }} €</span>
+            <sup class="original-price-sup">{{ product.price }} €</sup>
+            <span class="discount-badge-inline">
+              -{{ calculateDiscountPercentage(product.price, product.discountedPrice) }}%
+            </span>
+          </h4>
+        </div>
+        <ng-template [ngIf]="!product.discountedPrice || product.discountedPrice >= product.price">
+          <h4>{{ product.price }} €</h4>
+        </ng-template>
+      </div>
 
-  <!-- Description section -->
-  <div class="row mt-5">
-    <div class="col-12">
-      <mat-tab-group>
-        <mat-tab label="Description">
-          <p>{{ product.shortDescription }}</p>
-        </mat-tab>
-      </mat-tab-group>
+      <div class="mb-3 size-option-select-style">
+        <label for="sizeSelect" class="label-style" [hidden]="product.genderName === 'Equipment'">Size</label>
+        <mat-form-field appearance="outline" class="w-100" [hidden]="product.genderName === 'Equipment'">
+          <mat-select [(ngModel)]="selectedVariationId" [disabled]="product.quantity === 0">
+            <mat-option *ngFor="let v of filteredVariations" [value]="v.id">
+              {{ v.sizeOptionName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <span matTooltip="Out of stock" [matTooltipDisabled]="product.quantity !== 0">
+      <button mat-raised-button class="w-100" color="primary" [disabled]="!selectedVariationId || product.quantity === 0" (click)="addToCart()">
+        <span class="material-icons me-2">shopping_cart</span>
+        Add to Cart
+      </button>
+      </span>
+
+      <div class="mt-4">
+        <mat-tab-group *ngIf="!isStacked" mat-stretch-tabs="false" mat-align-tabs="start" class="product-details-mat-tab">
+          <mat-tab label="Description">
+            <p style="margin-top: 8px;">
+              {{product.shortDescription}}
+            </p>
+          </mat-tab>
+        </mat-tab-group>
+
+        <mat-accordion *ngIf="isStacked">
+          <mat-expansion-panel class="product-details-mat-expansion-panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Description
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              {{product.shortDescription}}
+            </p>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-divider class="mat-divider-gray-color"></mat-divider>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Lightbox overlay (outside row!) -->
 <div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="closeLightbox()">
   <div class="lightbox-content" (click)="$event.stopPropagation()">
     <span class="close-button" (click)="closeLightbox()">&times;</span>
     <img [src]="images[currentIndex]" class="lightbox-image" />
-    <button mat-button  (click)="prevImage($event)">&#10094;</button>
-    <button mat-button class="button-style" (click)="nextImage($event)">&#10095;</button>
+    <button class="nav-button left" (click)="prevImage($event)">&#10094;</button>
+    <button class="nav-button right" (click)="nextImage($event)">&#10095;</button>
   </div>
 </div>
+</main>

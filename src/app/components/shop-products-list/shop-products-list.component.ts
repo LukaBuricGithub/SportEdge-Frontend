@@ -28,6 +28,7 @@ import { FilteredProductsResultDto } from '../../models/FilteredProductsResultDt
   templateUrl: './shop-products-list.component.html',
   styleUrl: './shop-products-list.component.scss'
 })
+
 export class ShopProductsListComponent implements OnInit {
 
   products: ProductDTO[] = [];
@@ -151,9 +152,10 @@ applyFilters(filters: any, drawer?: any) {
     pageNumber: 1,
     pageSize: this.pageSize,
     sortBy: this.selectedSortOption,
-    searchText: this.currentFilters.searchText // keep search term if active
+    searchText: null
+    //searchText: this.currentFilters.searchText // keep search term if active
   };
-
+  this.currentSearchText = null;
   this.currentPage = 0; // reset paginator
   this.loadProducts();
 }

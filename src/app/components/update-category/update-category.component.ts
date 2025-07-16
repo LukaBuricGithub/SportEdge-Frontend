@@ -51,16 +51,6 @@ export class UpdateCategoryComponent implements OnInit {
 
       });
 
-
-
-      /*
-      this.categoryService.getAllCategories().subscribe(categories => {
-        this.allCategories = categories;
-        this.hierarchicalCategories = this.buildHierarchyLabels(categories);
-      });
-      */
-
-
       this.categoryService.getAllCategories().subscribe((categories) => {
         this.allCategories = categories;
         const excludedIds = this.findDescendantIds(this.categoryId, categories);

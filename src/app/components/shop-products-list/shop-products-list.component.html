@@ -1,14 +1,7 @@
 <main>
-  <!-- Container for large screen layout -->
   <div class="container mt-4 d-none d-lg-block desktop-layout">
     <div class="row">
       <div class="col-lg-3">
-        <!-- <app-shop-products-filter 
-        [selectedCategoryId]="categoryIdFromParams"
-        [selectedGenderTypeId] = "genderTypeFromParams"
-        (applyFilters)="applyFilters($event)">
-        </app-shop-products-filter> -->
-
          <app-shop-products-filter
           [filters]="currentFilters"
         (applyFilters)="applyFilters($event)">
@@ -18,6 +11,9 @@
       </div>
 
       <div class="col-lg-9">
+        <div *ngIf="currentSearchText" class="search-results-title text-center mb-3">
+          <h3>Search results for: "{{ currentSearchText }}"</h3>
+        </div>
         <div class="d-flex justify-content-end align-items-center mb-3 sort-container">
           <mat-form-field appearance="outline" class="sort-select">
             <mat-label>Sort by</mat-label>
@@ -67,7 +63,6 @@
           </div>
         </div>
 
-        <!-- Spacer div to push paginator down on desktop -->
         <div class="paginator-spacer d-none d-lg-block"></div>
 
         <div class="d-flex justify-content-center mt-4" *ngIf="products && products.length > 0">
@@ -82,7 +77,6 @@
     </div>
   </div>
 
-  <!-- Drawer container for small screens -->
   <mat-drawer-container class="d-lg-none" style="height: 100vh;">
     <mat-drawer #drawer mode="over">
       <div class="drawer-content">
@@ -107,6 +101,9 @@
       </div>
 
       <div class="container mt-4">
+        <div *ngIf="currentSearchText" class="search-results-title text-center mb-3">
+          <h3>Search results for: "{{ currentSearchText }}"</h3>
+        </div>
         <div *ngIf="!products || products.length === 0" class="no-products-message text-center">
           <h3>No products found.</h3>
         </div>

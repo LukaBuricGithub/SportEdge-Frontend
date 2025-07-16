@@ -6,7 +6,6 @@
       <mat-panel-title>Gender / Type</mat-panel-title>
     </mat-expansion-panel-header>
     <mat-form-field appearance="fill" style="width: 100%;">
-      <!-- <mat-label>Gender / Type</mat-label> -->
       <mat-select [(value)]="selectedGender" placeholder="Any">
         <mat-option [value]="null">Any</mat-option>
         <mat-option *ngFor="let gender of genders" [value]="gender.id">{{ gender.name }}</mat-option>

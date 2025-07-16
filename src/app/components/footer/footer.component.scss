@@ -20,9 +20,6 @@
 }
 
 
-
-
-
 .mobile-footer mat-panel-title {
     color: white;
     font-weight: 700;
@@ -36,23 +33,11 @@
   font-weight: 700;
 }
 
-
-
 .desktop-footer 
 {
     margin: 0 auto;
     color: white;
 }
-
-/*
-.desktop-footer {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-*/
-
 
 .footer-column h3 {
   margin-bottom: 0.5rem;
@@ -117,6 +102,3 @@
     }
   }
 }
-
-
-

@@ -64,42 +64,6 @@ $custom-orange-palette: (
 );
 
 
-/*
-$custom-primary-palette: (
-  50: #e9f0f1,
-  100: #c7d9dd,
-  200: #a2c0c6,
-  300: #7da7af,
-  400: #61949d,
-  500: #45818c,
-  600: #3e7984,
-  700: #366e79,
-  800: #2e646f,
-  900: #1f515c,
-  A100: #9cecff,
-  A200: #69e3ff,
-  A400: #36d9ff,
-  A700: #1dd4ff,
-  contrast: (
-    50: #000000,
-    100: #000000,
-    200: #000000,
-    300: #000000,
-    400: #000000,
-    500: #ffffff,
-    600: #ffffff,
-    700: #ffffff,
-    800: #ffffff,
-    900: #ffffff,
-    A100: #000000,
-    A200: #000000,
-    A400: #000000,
-    A700: #000000,
-  ),
-);
-*/
-
-
 $custom-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
 $custom-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
 $custom-warn: mat.m2-define-palette(mat.$m2-red-palette);
@@ -118,16 +82,47 @@ $custom-theme: mat.m2-define-light-theme(
 @include mat.all-component-themes($custom-theme);
 
 :root {
-  @include mat.divider-overrides((
-    color: white,
-    width: 2px,
-  ));
-
+  // @include mat.divider-overrides((
+  //   color: white,
+  //   width: 2px,
+  // ));
   @include mat.list-overrides((
     //list-item-label-text-color:white,
     //list-item-focus-label-text-color:white,
     //list-item-hover-label-text-color:white,
     list-item-label-text-weight:700,
+  ));
+}
+
+
+
+.icon-button 
+{
+  @include mat.icon-button-overrides((
+    //filled-container-color: orange,
+    //filled-label-text-color: red,
+    //hover-state-layer-opacity:, 
+    //focus-state-layer-opacity, 
+    //pressed-state-layer-opacity
+    hover-state-layer-opacity: 0,
+    focus-state-layer-opacity: 0,
+    pressed-state-layer-opacity: 0,
+  ));
+}
+
+.mat-divider-white-color 
+{
+   @include mat.divider-overrides((
+    color: white,
+    width: 2px,
+  ));
+}
+
+.mat-divider-gray-color
+{
+    @include mat.divider-overrides((
+    color: #bfbfbf,
+    width: 0.5px,
   ));
 }
 
@@ -153,10 +148,30 @@ $custom-theme: mat.m2-define-light-theme(
   --mdc-protected-button-container-color: #{mat.m2-get-color-from-palette($custom-orange-palette, 500)};
   --mdc-protected-button-label-text-color: #{mat.m2-get-contrast-color-from-palette($custom-orange-palette, 500)};
   --mdc-protected-button-hover-state-layer-color: #{mat.m2-get-color-from-palette($custom-orange-palette, 600)};
+}
 
-  //background-color: mat.m2-get-color-from-palette($custom-orange-palette, 500);
-  //color: mat.m2-get-contrast-color-from-palette($custom-orange-palette, 500);
-  //&:hover {
-    //background-color: mat.m2-get-color-from-palette($custom-orange-palette, 600);
-  //}
+.product-details-mat-tab 
+{
+  @include mat.tabs-overrides((
+    divider-color: #bfbfbf,
+    divider-height:0.5px,
+    label-text-size: 1.1rem,
+    active-ripple-color: none
+    //active-indicator-height: 4px
+    //active-indicator-color: orange,
+  ));
+}
+
+.product-details-mat-expansion-panel
+{
+  @include mat.expansion-overrides((
+    container-background-color: none,
+    container-shape: 0,
+    header-text-size: 1.1rem,
+    header-hover-state-layer-color: none,
+    header-focus-state-layer-color: none,
+    header-text-color: #3f51b5,
+    header-indicator-color: #3f51b5
+    //active-ripple-color: none
+  ));
 }

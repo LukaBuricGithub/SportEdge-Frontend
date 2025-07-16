@@ -1,7 +1,6 @@
 
 .custom-navbar {
   background-color: #222222 !important;
-  //margin-bottom: 75px;
 }
 
 .custom-navbar .nav-link,
@@ -11,7 +10,6 @@
   text-decoration: none;
 }
 
-//Default font weight
 .navbar-nav .nav-link {
   font-weight: 700;
 }
@@ -20,7 +18,6 @@
 }
 
 
-//Navbar toggler styling (hamburger)
 .navbar-toggler {
   padding: 0.25rem 0.5rem;
   font-size: 0.9rem;  
@@ -32,8 +29,6 @@
 }
 
 
-/* On desktop and larger (e.g., 992px and up) */
-/*This is for horizontal list items*/
 @media (min-width: 992px) {
   .ms-0 {
     margin-left: 15px !important; 
@@ -194,15 +189,6 @@ input.form-control:focus {
 }
 
 
-//Provjeri ovaj dio
-//.nav-link.dropdown-toggle[aria-expanded="true"],
-//.nav-item.dropdown.show > .nav-link.dropdown-toggle {
-  //color: #ffcc00; 
-  //text-decoration: underline;
-//}
-
-
-
 @media (max-width: 576px) {
   .navbar-brand img {
     height: 22px;
@@ -229,4 +215,9 @@ input.form-control:focus {
   .custom-navbar form.d-lg-none .btn {
     padding: 6px 10px;
   }
+}
+
+.icon-style 
+{
+  font-size: 1.7rem;
 }
