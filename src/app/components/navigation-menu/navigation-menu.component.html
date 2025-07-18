@@ -39,12 +39,6 @@
     </a>
   </li>
 
-  <!-- <li class="nav-item" *ngIf="isLoggedIn()">
-    <a class="nav-link" routerLink="/customer/shopping-cart" matTooltip="Shopping cart">
-      <i class="bi bi-cart icon-style "></i>
-    </a>
-  </li> -->
-
   <li class="nav-item" *ngIf="isLoggedIn()">
   <a class="nav-link" routerLink="/customer/shopping-cart" matTooltip="Shopping cart"
      [matBadge]="cartItemCount"

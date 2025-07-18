@@ -136,12 +136,30 @@ ngOnInit() {
       });
     },
     error: (err) => {
-      console.error('Error adding product to cart:', err);
-      this.snackBar.open('Error adding product to cart. Please try again.', 'Close', {
-        duration: 4000,
-        panelClass: ['error-snackbar']
-      });
-    },
+  console.error('Error adding product to cart:', err);
+  
+  const message: string = err?.error;
+
+  if (err.status === 400 && typeof message === 'string' && message.startsWith('Exceeded_quantity:')) {
+    const cleanMessage = message.replace('Exceeded_quantity:', '').trim();
+    this.snackBar.open(`Not enough stock: ${cleanMessage}`, 'Close', {
+      duration: 4000,
+      panelClass: ['error-snackbar']
+    });
+  } else {
+    this.snackBar.open('Error adding product to cart. Please try again.', 'Close', {
+      duration: 4000,
+      panelClass: ['error-snackbar']
+    });
+  }
+}
+    // error: (err) => {
+    //   console.error('Error adding product to cart:', err);
+    //   this.snackBar.open('Error adding product to cart. Please try again.', 'Close', {
+    //     duration: 4000,
+    //     panelClass: ['error-snackbar']
+    //   });
+    // },
   });
     }
   }

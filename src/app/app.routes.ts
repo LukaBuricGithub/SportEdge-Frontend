@@ -47,6 +47,7 @@ import { ShopProductDetailsComponent } from './components/shop-product-details/s
 import { ShopUserDetailsComponent } from './components/shop-user-details/shop-user-details.component';
 import { ShopUserUpdateComponent } from './components/shop-user-update/shop-user-update.component';
 import { ShopShoppingCartComponent } from './components/shop-shopping-cart/shop-shopping-cart.component';
+import { ShopCheckoutComponent } from './components/shop-checkout/shop-checkout.component';
 
 export const routes: Routes = [
     {
@@ -82,7 +83,8 @@ export const routes: Routes = [
             { path: '', component: ShopUserDetailsComponent },
             { path: 'profile', component: ShopUserDetailsComponent },
             { path: 'update-profile', component: ShopUserUpdateComponent },
-            { path: 'shopping-cart', component: ShopShoppingCartComponent }
+            { path: 'shopping-cart', component: ShopShoppingCartComponent },
+            { path: 'finished-order-message', component: ShopCheckoutComponent }
         ]
     },
     {

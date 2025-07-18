@@ -1,80 +1,172 @@
 <div class="container my-4">
   <div class="card p-3">
-    <div>
-      <h2>Your Shopping Cart</h2>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="d-flex justify-content-center align-items-center min-vh-100">
+      <mat-spinner></mat-spinner>
     </div>
 
-    
-    <div *ngIf="loading; else cartContent" class="d-flex justify-content-center align-items-center min-vh-100">
-  <mat-spinner></mat-spinner>
-</div>
-
-
-    <ng-template #cartContent>
+    <!-- Content after loading -->
+    <ng-container *ngIf="!loading">
       <ng-container *ngIf="cart?.cartItems && cart.cartItems.length > 0; else emptyCart">
 
-        <div *ngFor="let item of cart.cartItems" class="row align-items-center border-bottom py-3 gx-2">
+        <mat-horizontal-stepper
+          linear
+          #stepper
+          (selectionChange)="onStepChange($event)"
+          [orientation]="stepperOrientation"
+        >
 
-          <!-- Combined image, name, size, price block -->
-          <div class="col-12 col-md-5 d-flex flex-column align-items-center text-center text-md-start">
-            <a [routerLink]="['/shop/product-details']" [queryParams]="{ productId: item.productId }">
-              <img [src]="item.imageUrl" [alt]="item.productName" class="img-fluid rounded cart-item-img">
-            </a>
-            <a [routerLink]="['/shop/product-details']" [queryParams]="{ productId: item.productId }"
-              class="text-decoration-none text-dark fw-bold mt-2">
-              {{ item.productName }}
-            </a>
-            <span class="text-muted mt-1">Size: {{ item.sizeOptionName }}</span>
-            <span>{{ item.priceAtTime | currency:'EUR':'symbol':'1.2-2' }}</span>
-          </div>
+          <!-- Step 1: Shopping Cart -->
+          <mat-step [stepControl]="cartForm">
+            <form [formGroup]="cartForm">
+              <ng-template matStepLabel>Shopping Cart</ng-template>
 
-          <!-- Quantity -->
-          <div class="col-12 col-md-3 mt-2 mt-md-0">
-            <mat-form-field appearance="outline" class="cart-quantity-field">
-              <mat-select [value]="item.quantity" (selectionChange)="onQuantityChange($event, item)">
-                <mat-option *ngFor="let q of quantityOptions" [value]="q">
-                  {{ q }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+              <div *ngFor="let item of cart.cartItems" class="row align-items-center border-bottom py-3 gx-2">
 
-          <!-- Total -->
-          <div class="col-6 col-md-2 fw-semibold text-start text-md-end mt-2 mt-md-0">
-            {{ item.priceAtTime * item.quantity | currency:'EUR':'symbol':'1.2-2' }}
-          </div>
+                <!-- Image + Name + Info -->
+                <div class="col-12 col-md-5 d-flex flex-column align-items-center text-center text-md-start">
+                  <a [routerLink]="['/shop/product-details']" [queryParams]="{ productId: item.productId }">
+                    <img [src]="item.imageUrl" [alt]="item.productName" class="img-fluid rounded cart-item-img" />
+                  </a>
+                  <a
+                    [routerLink]="['/shop/product-details']"
+                    [queryParams]="{ productId: item.productId }"
+                    class="text-decoration-none text-dark fw-bold mt-2"
+                    >{{ item.productName }}</a
+                  >
+                  <span class="text-muted mt-1">Size: {{ item.sizeOptionName }}</span>
+                  <span>{{ item.priceAtTime | currency: 'EUR' }}</span>
+                </div>
 
-          <!-- Remove button -->
-          <div class="col-6 col-md-2 text-end mt-2 mt-md-0">
-            <button mat-icon-button color="warn" disableRipple class="icon-button" (click)="removeItem(item)"
-              aria-label="Remove item">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </div>
+                <!-- Quantity Selector -->
+                <div class="col-12 col-md-3 mt-2 mt-md-0">
+                  <mat-form-field appearance="outline" class="cart-quantity-field">
+                    <mat-select [value]="item.quantity" (selectionChange)="onQuantityChange($event, item)">
+                      <mat-option *ngFor="let q of quantityOptions" [value]="q">
+                        {{ q }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
 
-        <div class="row mt-4">
-          <div class="col text-center text-md-end">
-            <h4>
-              Total: {{ getCartTotal() | currency:'EUR':'symbol':'1.2-2' }}
-            </h4>
-          </div>
-        </div>
+                <!-- Total -->
+                <div class="col-6 col-md-2 fw-semibold text-start text-md-end mt-2 mt-md-0">
+                  {{ item.priceAtTime * item.quantity | currency: 'EUR' }}
+                </div>
 
-        <div class="row mt-2">
-          <div class="col text-center text-md-end">
-            <button mat-flat-button color="primary" (click)="clearCart()">Checkout</button>
-          </div>
-        </div>
+                <!-- Delete Button -->
+                <div class="col-6 col-md-2 text-end mt-2 mt-md-0">
+                  <button mat-icon-button color="warn" disableRipple class="icon-button" (click)="removeItem(item)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
 
+              <!-- Cart Total -->
+              <div class="row mt-4">
+                <div class="col text-center text-md-end">
+                  <h4>Total: {{ getCartTotal() | currency: 'EUR' }}</h4>
+                </div>
+              </div>
+
+              <!-- Next Button -->
+              <div class="row mt-2">
+                <div class="col text-center text-md-end">
+                  <button mat-flat-button color="primary" matStepperNext>Next</button>
+                </div>
+              </div>
+            </form>
+          </mat-step>
+
+          <!-- Step 2: Shipping Info -->
+          <mat-step [stepControl]="checkoutForm">
+            <form [formGroup]="checkoutForm">
+              <ng-template matStepLabel>Shipping Info</ng-template>
+
+              <div class="container py-4">
+                <div class="row">
+                  <div class="col-12 col-md-11 mb-11 d-flex justify-content-center">
+                    <div class="w-100">
+                      <h3>Shipping Information</h3>
+
+                      <mat-form-field appearance="outline" class="w-100 mb-3">
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="address" />
+                        <mat-error
+                          *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched"
+                        >
+                          Address is required (1–100 characters)
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="w-100 mb-3">
+                        <mat-label>Country</mat-label>
+                        <input matInput formControlName="country" />
+                        <mat-error *ngIf="checkoutForm.get('country')?.invalid && checkoutForm.get('country')?.touched">
+                          Country is required (1–100 characters)
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="w-100 mb-3">
+                        <mat-label>City</mat-label>
+                        <input matInput formControlName="city" />
+                        <mat-error *ngIf="checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched">
+                          City is required (1–100 characters)
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="col text-center text-md-end">
+                    <button mat-flat-button color="primary" matStepperNext [disabled]="checkoutForm.invalid">Next</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </mat-step>
+
+          <!-- Step 3: Payment -->
+          <mat-step [stepControl]="payementForm">
+            <form [formGroup]="payementForm">
+              <ng-template matStepLabel>Payment</ng-template>
+
+              <div class="container py-4 d-flex justify-content-center">
+                <div class="row g-4" style="max-width: 700px; width: 100%">
+                  <div
+                    class="col-12 col-md-5 d-flex flex-column justify-content-center align-items-center text-center"
+                  >
+                    <div class="p-3">
+                      <h4>Total to Pay</h4>
+                      <p class="fs-5 fw-bold">{{ getCartTotal() | currency: 'EUR' }}</p>
+                      <p>Please confirm your purchase using PayPal.</p>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+                    <div class="p-3 text-center w-100">
+                      <div *ngIf="checkoutForm.valid" #paypalContainer class="mx-auto" style="max-width: 300px"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-end mt-3">
+                <button mat-stroked-button matStepperPrevious>Back</button>
+              </div>
+            </form>
+          </mat-step>
+        </mat-horizontal-stepper>
       </ng-container>
-    </ng-template>
 
-    <ng-template #emptyCart>
-      <div class="text-center my-4">
-        <h4>Your shopping cart is empty.</h4>
-      </div>
-    </ng-template>
-
+      <!-- Shown if cart is empty -->
+      <ng-template #emptyCart>
+        <div class="text-center my-4">
+          <h4>Your shopping cart is empty.</h4>
+        </div>
+      </ng-template>
+    </ng-container>
   </div>
 </div>
