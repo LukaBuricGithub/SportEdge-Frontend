@@ -7,6 +7,7 @@ import { ResetPasswordRequestDTO } from '../models/ResetPasswordRequestDTO';
 import { CustomerServiceMessageDTO } from '../models/CustomerServiceMessageDTO';
 import { UserDTO } from '../models/UserDTO';
 import { UpdateUserRequestDTO } from '../models/UpdateUserRequestDTO';
+import { UserSendReceiptDTO } from '../models/UserSendReceiptDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +44,6 @@ export class UserService {
     return this.http.delete<void>(url);
   }
 
-
-
   userSignUp(user:SignUpRequestDTO) : Observable<any>
   {
     return this.http.post(this.baseUrl,user);
@@ -68,5 +67,10 @@ export class UserService {
     return this.http.post(this.baseUrl+'/customer-service-request',message);
   }
 
+  sendReceiptEmail(receipt: UserSendReceiptDTO): Observable<any> 
+  {
+    const url = `${this.baseUrl}/send-receipt`;
+    return this.http.post(url, receipt);
+  }
 
 }

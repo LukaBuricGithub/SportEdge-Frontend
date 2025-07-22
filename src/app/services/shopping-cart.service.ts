@@ -71,26 +71,3 @@ export class ShoppingCartService
     );
   }
 }
-
-  // addItem(userId: number, productVariationId: number, quantity: number): Observable<void> {
-  //   const params = new HttpParams()
-  //     .set('productVariationId', productVariationId.toString())
-  //     .set('quantity', quantity.toString());
-
-  //   return this.http.post<void>(`${this.baseUrl}/${userId}/items`, null, { params });
-  // }
-
-  // updateItem(userId: number, productVariationId: number, quantity: number): Observable<void> {
-  //   const params = new HttpParams()
-  //     .set('quantity', quantity.toString());
-
-  //   return this.http.put<void>(`${this.baseUrl}/${userId}/items/${productVariationId}`, null, { params });
-  // }
-
-  // removeItem(userId: number, productVariationId: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.baseUrl}/${userId}/items/${productVariationId}`);
-  // }
-
-  // clearCart(userId: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.baseUrl}/${userId}/items`);
-  // }

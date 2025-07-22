@@ -91,16 +91,6 @@
                       <h3>Shipping Information</h3>
 
                       <mat-form-field appearance="outline" class="w-100 mb-3">
-                        <mat-label>Address</mat-label>
-                        <input matInput formControlName="address" />
-                        <mat-error
-                          *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched"
-                        >
-                          Address is required (1–100 characters)
-                        </mat-error>
-                      </mat-form-field>
-
-                      <mat-form-field appearance="outline" class="w-100 mb-3">
                         <mat-label>Country</mat-label>
                         <input matInput formControlName="country" />
                         <mat-error *ngIf="checkoutForm.get('country')?.invalid && checkoutForm.get('country')?.touched">
@@ -113,6 +103,16 @@
                         <input matInput formControlName="city" />
                         <mat-error *ngIf="checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched">
                           City is required (1–100 characters)
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="w-100 mb-3">
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="address" />
+                        <mat-error
+                          *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched"
+                        >
+                          Address is required (1–100 characters)
                         </mat-error>
                       </mat-form-field>
                     </div>

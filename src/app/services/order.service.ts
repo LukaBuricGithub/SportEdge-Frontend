@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OrderDTO } from '../models/OrderDTO';
+import { CreateOrderRequestDto } from '../models/CreateOrderRequestDto';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { OrderDTO } from '../models/OrderDTO';
 export class OrderService {
 
   baseUrl = "https://localhost:7138/api/Orders"
-  
+
   constructor(private http:HttpClient) { }
 
   getAllOrders(): Observable<OrderDTO[]> 
@@ -30,4 +31,8 @@ export class OrderService {
     return this.http.get<OrderDTO>(url);
   }
 
+  createOrder(orderData: CreateOrderRequestDto): Observable<OrderDTO> 
+  {
+    return this.http.post<OrderDTO>(this.baseUrl, orderData);
+  }
 }
