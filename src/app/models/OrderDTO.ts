@@ -10,5 +10,4 @@ export interface OrderDTO
     userCountry:string;
     userCity:string;
     userAddress:string;
-    //public List<OrderItemDto> OrderItems { get; set; }
 }

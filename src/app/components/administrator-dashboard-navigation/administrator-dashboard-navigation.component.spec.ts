@@ -13,11 +13,6 @@ describe('AdministratorDashboardNavigationComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AdministratorDashboardNavigationComponent],
       imports: [...MaterialModules,
-        //MatButtonModule,
-        //MatIconModule,
-        //MatListModule,
-        //MatSidenavModule,
-        //MatToolbarModule,
       ]
     });
   }));

@@ -42,21 +42,6 @@ export class UpdateProductVariationsQuantityComponent implements OnInit {
   }
 
 
-  //   initializeForm(): void {
-  //   this.updateProductVariationsForm = this.fb.group({
-  //     variations: this.fb.array(this.variations.map(variation =>
-  //       this.fb.group({
-  //         id: [variation.id],
-  //         quantityInStock: [variation.quantityInStock, [Validators.required, Validators.min(0)]],
-  //         productId: [variation.productId],
-  //         sizeOptionId: [variation.sizeOptionId],
-  //         sizeOptionName: [variation.sizeOptionName]
-  //       })
-  //     ))
-  //   });
-  // }
-
-
   initializeForm(): void {
   this.updateProductVariationsForm = this.fb.group({
     variations: this.fb.array(this.variations.map(variation => {

@@ -70,39 +70,6 @@ export class CreateProductComponent implements OnInit {
   }
 
 
-// discountedPriceValidator() {
-//   return (form: AbstractControl) => {
-//     const priceControl = form.get('price');
-//     const discountedPriceControl = form.get('discountedPrice');
-
-//     if (!priceControl || !discountedPriceControl) {
-//       return null;
-//     }
-
-//     const price = priceControl.value;
-//     const discountedPrice = discountedPriceControl.value;
-
-//     if (discountedPrice !== null && discountedPrice !== undefined && price !== null && price !== undefined) {
-//       if (discountedPrice >= price) {
-//         discountedPriceControl.setErrors({ discountedPriceInvalid: true });
-//       } else {
-
-//         const errors = discountedPriceControl.errors;
-//         if (errors) {
-//           delete errors['discountedPriceInvalid'];
-//           if (Object.keys(errors).length === 0) {
-//             discountedPriceControl.setErrors(null);
-//           } else {
-//             discountedPriceControl.setErrors(errors);
-//           }
-//         }
-//       }
-//     }
-
-//     return null;
-//   };
-// }
-
 discountedPriceValidator() {
   return (form: AbstractControl) => {
     const priceControl = form.get('price');

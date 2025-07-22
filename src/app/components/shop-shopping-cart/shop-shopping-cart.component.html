@@ -1,12 +1,10 @@
 <div class="container my-4">
   <div class="card p-3">
 
-    <!-- Loading Spinner -->
     <div *ngIf="loading" class="d-flex justify-content-center align-items-center min-vh-100">
       <mat-spinner></mat-spinner>
     </div>
 
-    <!-- Content after loading -->
     <ng-container *ngIf="!loading">
       <ng-container *ngIf="cart?.cartItems && cart.cartItems.length > 0; else emptyCart">
 
@@ -17,14 +15,12 @@
           [orientation]="stepperOrientation"
         >
 
-          <!-- Step 1: Shopping Cart -->
           <mat-step [stepControl]="cartForm">
             <form [formGroup]="cartForm">
               <ng-template matStepLabel>Shopping Cart</ng-template>
 
               <div *ngFor="let item of cart.cartItems" class="row align-items-center border-bottom py-3 gx-2">
 
-                <!-- Image + Name + Info -->
                 <div class="col-12 col-md-5 d-flex flex-column align-items-center text-center text-md-start">
                   <a [routerLink]="['/shop/product-details']" [queryParams]="{ productId: item.productId }">
                     <img [src]="item.imageUrl" [alt]="item.productName" class="img-fluid rounded cart-item-img" />
@@ -39,7 +35,6 @@
                   <span>{{ item.priceAtTime | currency: 'EUR' }}</span>
                 </div>
 
-                <!-- Quantity Selector -->
                 <div class="col-12 col-md-3 mt-2 mt-md-0">
                   <mat-form-field appearance="outline" class="cart-quantity-field">
                     <mat-select [value]="item.quantity" (selectionChange)="onQuantityChange($event, item)">
@@ -50,12 +45,10 @@
                   </mat-form-field>
                 </div>
 
-                <!-- Total -->
                 <div class="col-6 col-md-2 fw-semibold text-start text-md-end mt-2 mt-md-0">
                   {{ item.priceAtTime * item.quantity | currency: 'EUR' }}
                 </div>
 
-                <!-- Delete Button -->
                 <div class="col-6 col-md-2 text-end mt-2 mt-md-0">
                   <button mat-icon-button color="warn" disableRipple class="icon-button" (click)="removeItem(item)">
                     <mat-icon>delete</mat-icon>
@@ -63,14 +56,12 @@
                 </div>
               </div>
 
-              <!-- Cart Total -->
               <div class="row mt-4">
                 <div class="col text-center text-md-end">
                   <h4>Total: {{ getCartTotal() | currency: 'EUR' }}</h4>
                 </div>
               </div>
 
-              <!-- Next Button -->
               <div class="row mt-2">
                 <div class="col text-center text-md-end">
                   <button mat-flat-button color="primary" matStepperNext>Next</button>
@@ -79,7 +70,6 @@
             </form>
           </mat-step>
 
-          <!-- Step 2: Shipping Info -->
           <mat-step [stepControl]="checkoutForm">
             <form [formGroup]="checkoutForm">
               <ng-template matStepLabel>Shipping Info</ng-template>
@@ -128,7 +118,6 @@
             </form>
           </mat-step>
 
-          <!-- Step 3: Payment -->
           <mat-step [stepControl]="payementForm">
             <form [formGroup]="payementForm">
               <ng-template matStepLabel>Payment</ng-template>
@@ -161,7 +150,6 @@
         </mat-horizontal-stepper>
       </ng-container>
 
-      <!-- Shown if cart is empty -->
       <ng-template #emptyCart>
         <div class="text-center my-4">
           <h4>Your shopping cart is empty.</h4>

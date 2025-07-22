@@ -8,7 +8,6 @@ import { FooterComponent } from "./components/footer/footer.component";
 
 @Component({
   selector: 'app-root',
-  //Prijedlog AI-a je dodati standalone
   standalone: true,
   imports: [RouterOutlet, RouterModule, RouterLink, ...MaterialModules, NavigationMenuComponent, FooterComponent],
   templateUrl: './app.component.html',

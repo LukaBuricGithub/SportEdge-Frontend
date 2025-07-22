@@ -53,12 +53,6 @@ export class DetailsOrderComponent implements OnInit {
       this.orderService.getOrderById(this.orderId).subscribe((x:OrderDTO) => {
         this.order = x;
         this.dataSource = new MatTableDataSource(this.order.orderItems);
-
-        // this.userService.getUserById(this.order.userId).subscribe(y => {
-        //   this.user = y;
-        // })
-      
-      
       });
 
       this.userService.getUserById(this.userId).subscribe((y:UserDTO) => {

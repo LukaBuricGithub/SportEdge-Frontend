@@ -19,10 +19,8 @@ export class ProductService {
 
   baseUrlGenderCategory = "https://localhost:7138/api/Genders"
 
-  //https://localhost:7138/api/ProductImages/1/images
   baseUrlProductImage = "https://localhost:7138/api/ProductImages"
 
-  //https://localhost:7138/api/ProductVariations/by-product/4
   baseUrlProductVariation =  "https://localhost:7138/api/ProductVariations";
 
   

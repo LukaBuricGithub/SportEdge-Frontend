@@ -90,7 +90,6 @@ ngOnInit() {
       this.product = x;
       console.log(this.product);
 
-      //this.images = this.product.imageFilenames.map(filename => this.imageBaseUrl + filename);
 
       this.images = (this.product.imageFilenames && this.product.imageFilenames.length > 0)
   ? this.product.imageFilenames.map(filename => this.imageBaseUrl + filename)
@@ -153,13 +152,6 @@ ngOnInit() {
     });
   }
 }
-    // error: (err) => {
-    //   console.error('Error adding product to cart:', err);
-    //   this.snackBar.open('Error adding product to cart. Please try again.', 'Close', {
-    //     duration: 4000,
-    //     panelClass: ['error-snackbar']
-    //   });
-    // },
   });
     }
   }

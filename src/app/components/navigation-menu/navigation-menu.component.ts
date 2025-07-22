@@ -86,7 +86,6 @@ export class NavigationMenuComponent implements OnInit, OnDestroy {
     this.router.navigate(['/shop/login']); 
   }
 
-  // Helpers to access auth service easily in template
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }

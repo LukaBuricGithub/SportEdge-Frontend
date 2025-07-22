@@ -100,7 +100,7 @@ export class ShopProductsListComponent implements OnInit {
       this.loadProducts();
 
       });
-      return; // wait for genderId lookup, don't call loadProducts twice
+      return;
     }
 
     this.loadProducts();
@@ -162,10 +162,10 @@ applyFilters(filters: any, drawer?: any) {
     pageSize: this.pageSize,
     sortBy: this.selectedSortOption,
     searchText: null
-    //searchText: this.currentFilters.searchText // keep search term if active
+    //searchText: this.currentFilters.searchText
   };
   this.currentSearchText = null;
-  this.currentPage = 0; // reset paginator
+  this.currentPage = 0;
   this.loadProducts();
 }
 
