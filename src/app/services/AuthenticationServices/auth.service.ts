@@ -72,7 +72,6 @@ export class AuthService {
   isLoggedIn(): boolean {
     // const payload = this.decodeToken();
     // if (!payload) return false;
-
     // const now = Math.floor(Date.now() / 1000);
     // return payload.exp > now;
     const payload = this.decodeToken();

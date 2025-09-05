@@ -23,7 +23,6 @@ export class ProductService {
 
   baseUrlProductVariation =  "https://localhost:7138/api/ProductVariations";
 
-  
   constructor(private http:HttpClient) { }
 
   getAllProducts(): Observable<ProductDTO[]> 
@@ -41,13 +40,11 @@ export class ProductService {
     return this.http.post(this.baseUrl,product);
   }
 
-
   getProductById(productId: number): Observable<ProductDTO> 
   {
     const url = `${this.baseUrl}/${productId}`;
     return this.http.get<ProductDTO>(url);
   }
-
 
   updateProduct(productId:number,product:UpdateProductRequestDTO) : Observable<any>
   {
@@ -60,7 +57,6 @@ export class ProductService {
     const url = `${this.baseUrl}/${productId}`;
     return this.http.delete<void>(url);
   }
-
 
   uploadProductImages(productId: number, files: File[]): Observable<any> 
   {
@@ -115,7 +111,6 @@ export class ProductService {
     return this.http.post<FilteredProductsResultDto>(`${this.baseUrl}/filter-products`, filter);
   }
 
-
   getProductsByFilter(filter: ProductFilterDto): Observable<FilteredProductsResultDto> 
   {
     return this.http.post<FilteredProductsResultDto>(`${this.baseUrl}/filter`, filter);
@@ -126,9 +121,9 @@ export class ProductService {
   return this.http.post<FilteredProductsResultDto>(url, filter, {
     params: {
       categoryId: categoryId.toString()
-    }
-  });
-}
+      }
+    });
+  }
 
   getGenderIdByGenderName(name:string) : Observable<number>
   {
@@ -139,5 +134,4 @@ export class ProductService {
       }
     });
   }
-
 }

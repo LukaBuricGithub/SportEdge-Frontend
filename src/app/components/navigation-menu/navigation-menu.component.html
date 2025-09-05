@@ -27,40 +27,38 @@
 
     <ul class="navbar-nav d-flex flex-row gap-3">
 
-  <li class="nav-item" *ngIf="!isLoggedIn()">
-    <a class="nav-link" routerLink="/shop/login">
-      <i class="bi bi-person icon-style "></i> Login
-    </a>
-  </li>
+      <li class="nav-item" *ngIf="!isLoggedIn()">
+        <a class="nav-link" routerLink="/shop/login">
+          <i class="bi bi-person icon-style "></i> Login
+        </a>
+      </li>
 
-  <li class="nav-item" *ngIf="isLoggedIn()">
-    <a class="nav-link" routerLink="/customer/profile" matTooltip="User profile">
-      <i class="bi bi-person icon-style "></i>
-    </a>
-  </li>
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a class="nav-link" routerLink="/customer/profile" matTooltip="User profile">
+          <i class="bi bi-person icon-style "></i>
+        </a>
+      </li>
 
-  <li class="nav-item" *ngIf="isLoggedIn()">
-  <a class="nav-link" routerLink="/customer/shopping-cart" matTooltip="Shopping cart"
-     [matBadge]="cartItemCount"
-     matBadgeColor="warn"
-     [matBadgeHidden]="cartItemCount === 0">
-    <i class="bi bi-cart icon-style"></i>
-  </a>
-</li>
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a class="nav-link" routerLink="/customer/shopping-cart" matTooltip="Shopping cart" [matBadge]="cartItemCount"
+          matBadgeColor="warn" [matBadgeHidden]="cartItemCount === 0">
+          <i class="bi bi-cart icon-style"></i>
+        </a>
+      </li>
 
-  <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
-    <a class="nav-link" routerLink="/admin" matTooltip="Admin panel">
-     <i class="bi bi-shield-lock icon-style"></i>
-    </a>
-  </li>
+      <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+        <a class="nav-link" routerLink="/admin" matTooltip="Admin panel">
+          <i class="bi bi-shield-lock icon-style"></i>
+        </a>
+      </li>
 
-  <li class="nav-item" *ngIf="isLoggedIn()">
-    <button class="btn btn-link nav-link" (click)="logout()" matTooltip="Logout">
-      <i class="bi bi-box-arrow-right icon-style "></i>
-    </button>
-  </li>
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <button class="btn btn-link nav-link" (click)="logout()" matTooltip="Logout">
+          <i class="bi bi-box-arrow-right icon-style "></i>
+        </button>
+      </li>
 
-</ul>
+    </ul>
 
   </div>
 

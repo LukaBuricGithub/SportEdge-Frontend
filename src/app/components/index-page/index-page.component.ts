@@ -43,6 +43,8 @@ export class IndexPageComponent  {
   '/images/index-page/gallery/Puma.jpg',
   '/images/index-page/gallery/Nike.jpg',
   '/images/index-page/gallery/NewBalance.jpg',
+  '/images/index-page/gallery/stock.webp',
+  '/images/index-page/gallery/stock_2.jpg'
 ];
 
 lightboxOpen = false;

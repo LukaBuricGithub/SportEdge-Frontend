@@ -6,12 +6,10 @@ main {
     font-weight: 500;
   }
 }
-
 .expansion-spacing 
 {
   margin-bottom: 16px;
 }
-
 .form-card {
   padding: 2rem;
   width: 100%;
@@ -21,50 +19,37 @@ main {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
-
 .full-width {
   width: 100%;
 }
-
 .button-container {
   display: flex;
   justify-content: space-between;
   margin-top: 1.5rem;
-
   button {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 }
-
-
-
 .responsive-table-container {
   overflow-x: auto;
   width: 100%;
 }
-
 .full-width-table {
   min-width: 600px; 
   width: 100%;
 }
-
-
 .icon-right {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
 }
-
-
 .expansion-spacing 
 {
   margin-bottom: 16px;
 }
-
-
 .title {
   font-weight: 600;
   display: -webkit-box;
@@ -73,49 +58,41 @@ main {
   overflow: hidden;
   font-size: 1.2rem;
 }
-
 @media (max-width: 768px) {
   .title {
     font-size: 1rem;
   }
 }
-
 @media (max-width: 480px) {
   .title {
     font-size: 0.9rem;
   }
 }
-
 .icon-right mat-icon {
   font-size: 24px;
   color:#222;;
 }
-
 .create-new-button {
   margin: 1rem 0;
   display: flex;
   justify-content: flex-start;
   gap: 0.5rem;
 }
-
 .no-focus-input {
   pointer-events: none;
   caret-color: transparent;
 }
-
 @media (max-width: 600px) {
   .button-container {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
   }
-
   .button-container button {
     width: 100%;
     justify-content: center;
   }
 }
-
 .euro-icon {
   color: #757575;
 }

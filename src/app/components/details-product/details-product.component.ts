@@ -177,7 +177,4 @@ export class DetailsProductComponent implements OnInit {
     }
   });
   }
-
-
-
 }
